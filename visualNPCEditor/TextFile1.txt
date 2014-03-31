@@ -1,0 +1,187 @@
+﻿				if (line.Contains("gfxoffsetx"))
+                {
+                    var split = line.Split(new char[] {'='}, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("gfxoffsety"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("width"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("width"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("height"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("gfxwidth"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("gfxheight"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("score"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("playerblock"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("playerblocktop"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("npcblock"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("npcblocktop"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("grabside"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("grabtop"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("jumphurt"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("nohurt"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("noblockcollision"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("cliffturn"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("noyoshi"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("foreground"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("speed"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("nofireball"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("nogravity"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("frames"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("framespeed"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+
+                if (line.Contains("framestyle"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
+                if (line.Contains("noiceball"))
+                {
+                    var split = line.Split(new char[] { '=' }, 2);
+                    //var val = int.Parse(split.ToString());
+                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
+                }
