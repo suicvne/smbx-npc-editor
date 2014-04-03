@@ -65,6 +65,7 @@
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
+            this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.noGravityCb = new System.Windows.Forms.CheckBox();
             this.noGravity = new System.Windows.Forms.CheckBox();
@@ -121,7 +122,23 @@
             this.label7 = new System.Windows.Forms.Label();
             this.grabSideCb = new System.Windows.Forms.CheckBox();
             this.grabTopCb = new System.Windows.Forms.CheckBox();
-            this.menuItem10 = new System.Windows.Forms.MenuItem();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button3 = new System.Windows.Forms.Button();
+            this.npcAniTip = new System.Windows.Forms.ToolTip(this.components);
+            this.frameSpeedTip = new System.Windows.Forms.ToolTip(this.components);
+            this.npcHeightTip = new System.Windows.Forms.ToolTip(this.components);
+            this.npcWidthTip = new System.Windows.Forms.ToolTip(this.components);
+            this.xOffsetTip = new System.Windows.Forms.ToolTip(this.components);
+            this.yOffsetTip = new System.Windows.Forms.ToolTip(this.components);
+            this.framesTip = new System.Windows.Forms.ToolTip(this.components);
+            this.frameStyleTip = new System.Windows.Forms.ToolTip(this.components);
+            this.foregroundTip = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frames)).BeginInit();
@@ -134,6 +151,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pNpcWidth)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -181,6 +200,7 @@
             this.frameSpeed.Name = "frameSpeed";
             this.frameSpeed.Size = new System.Drawing.Size(115, 20);
             this.frameSpeed.TabIndex = 5;
+            this.frameSpeedTip.SetToolTip(this.frameSpeed, resources.GetString("frameSpeed.ToolTip"));
             // 
             // frameSpeedCb
             // 
@@ -195,11 +215,12 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(0, 173);
+            this.label25.Location = new System.Drawing.Point(6, 173);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(73, 13);
             this.label25.TabIndex = 46;
             this.label25.Text = "Frame Speed:";
+            this.foregroundTip.SetToolTip(this.label25, resources.GetString("label25.ToolTip"));
             // 
             // frameStyleCb
             // 
@@ -218,6 +239,7 @@
             this.frames.Name = "frames";
             this.frames.Size = new System.Drawing.Size(115, 20);
             this.frames.TabIndex = 4;
+            this.framesTip.SetToolTip(this.frames, "The number of frames the NPC has.");
             // 
             // frameStyle
             // 
@@ -232,6 +254,7 @@
             this.frameStyle.Name = "frameStyle";
             this.frameStyle.Size = new System.Drawing.Size(115, 21);
             this.frameStyle.TabIndex = 6;
+            this.frameStyleTip.SetToolTip(this.frameStyle, resources.GetString("frameStyle.ToolTip"));
             // 
             // label24
             // 
@@ -241,6 +264,7 @@
             this.label24.Size = new System.Drawing.Size(60, 13);
             this.label24.TabIndex = 43;
             this.label24.Text = "Framestyle:";
+            this.frameStyleTip.SetToolTip(this.label24, resources.GetString("label24.ToolTip"));
             // 
             // framesCb
             // 
@@ -260,6 +284,7 @@
             this.label23.Size = new System.Drawing.Size(44, 13);
             this.label23.TabIndex = 16;
             this.label23.Text = "Frames:";
+            this.frameStyleTip.SetToolTip(this.label23, "The number of frames the NPC has.");
             // 
             // foregroundCb
             // 
@@ -279,6 +304,7 @@
             this.foreground.Name = "foreground";
             this.foreground.Size = new System.Drawing.Size(15, 14);
             this.foreground.TabIndex = 7;
+            this.foregroundTip.SetToolTip(this.foreground, "If checked, the NPC will be shown in front of everything");
             this.foreground.UseVisualStyleBackColor = true;
             // 
             // label19
@@ -289,6 +315,7 @@
             this.label19.Size = new System.Drawing.Size(64, 13);
             this.label19.TabIndex = 13;
             this.label19.Text = "Foreground:";
+            this.npcAniTip.SetToolTip(this.label19, "If checked, the NPC will be shown in front of everything");
             // 
             // yOffset
             // 
@@ -302,6 +329,7 @@
             this.yOffset.Name = "yOffset";
             this.yOffset.Size = new System.Drawing.Size(115, 20);
             this.yOffset.TabIndex = 4;
+            this.yOffsetTip.SetToolTip(this.yOffset, "Moves the graphic in the Y direction");
             // 
             // yOffsetCb
             // 
@@ -325,6 +353,7 @@
             this.xOffset.Name = "xOffset";
             this.xOffset.Size = new System.Drawing.Size(115, 20);
             this.xOffset.TabIndex = 3;
+            this.xOffsetTip.SetToolTip(this.xOffset, "Moves the graphic in the X direction");
             // 
             // xOffsetCb
             // 
@@ -344,6 +373,7 @@
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Y Offset:";
+            this.yOffsetTip.SetToolTip(this.label4, "Moves the graphic in the Y direction");
             // 
             // label3
             // 
@@ -353,6 +383,7 @@
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "X Offset:";
+            this.npcHeightTip.SetToolTip(this.label3, "Moves the graphic in the X direction");
             // 
             // label2
             // 
@@ -362,6 +393,7 @@
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Width:";
+            this.npcWidthTip.SetToolTip(this.label2, "The width, in pixels, of the NPC. Not related to physics");
             // 
             // npcWidth
             // 
@@ -375,6 +407,7 @@
             this.npcWidth.Name = "npcWidth";
             this.npcWidth.Size = new System.Drawing.Size(115, 20);
             this.npcWidth.TabIndex = 2;
+            this.npcHeightTip.SetToolTip(this.npcWidth, "The width, in pixels, of the NPC. Not related to physics");
             // 
             // npcWCb
             // 
@@ -394,6 +427,7 @@
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Height:";
+            this.npcHeightTip.SetToolTip(this.label1, "The height, in pixels, of the NPC. Not related to the physics.");
             // 
             // npcHeight
             // 
@@ -407,6 +441,7 @@
             this.npcHeight.Name = "npcHeight";
             this.npcHeight.Size = new System.Drawing.Size(115, 20);
             this.npcHeight.TabIndex = 1;
+            this.xOffsetTip.SetToolTip(this.npcHeight, "The height, in pixels, of the NPC. Not related to the physics.");
             // 
             // npcHCb
             // 
@@ -490,6 +525,12 @@
             this.menuItem9.Text = "SMBX Forums";
             this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
+            // menuItem10
+            // 
+            this.menuItem10.Index = 2;
+            this.menuItem10.Text = "Changelog";
+            this.menuItem10.Click += new System.EventHandler(this.menuItem10_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.noGravityCb);
@@ -544,6 +585,7 @@
             this.noGravity.Name = "noGravity";
             this.noGravity.Size = new System.Drawing.Size(15, 14);
             this.noGravity.TabIndex = 16;
+            this.toolTip.SetToolTip(this.noGravity, "If checked, the NPC won\'t obey gravity/walks mid-air");
             this.noGravity.UseVisualStyleBackColor = true;
             // 
             // label22
@@ -554,6 +596,7 @@
             this.label22.Size = new System.Drawing.Size(60, 13);
             this.label22.TabIndex = 43;
             this.label22.Text = "No Gravity:";
+            this.toolTip.SetToolTip(this.label22, "If checked, the NPC won\'t obey gravity/walks mid-air");
             // 
             // cliffTurnCb
             // 
@@ -573,6 +616,7 @@
             this.label16.Size = new System.Drawing.Size(95, 13);
             this.label16.TabIndex = 13;
             this.label16.Text = "No Block Collision:";
+            this.toolTip.SetToolTip(this.label16, "If checked, the NPC will not clip through blocks (pass through like a ghost)");
             // 
             // cliffTurn
             // 
@@ -582,6 +626,7 @@
             this.cliffTurn.Name = "cliffTurn";
             this.cliffTurn.Size = new System.Drawing.Size(15, 14);
             this.cliffTurn.TabIndex = 15;
+            this.toolTip.SetToolTip(this.cliffTurn, "If checked, the NPC will not walk off a cliff");
             this.cliffTurn.UseVisualStyleBackColor = true;
             // 
             // noBlockCollision
@@ -592,6 +637,7 @@
             this.noBlockCollision.Name = "noBlockCollision";
             this.noBlockCollision.Size = new System.Drawing.Size(15, 14);
             this.noBlockCollision.TabIndex = 14;
+            this.toolTip.SetToolTip(this.noBlockCollision, "If checked, the NPC will not clip through blocks (pass through like a ghost)");
             this.noBlockCollision.UseVisualStyleBackColor = true;
             // 
             // label17
@@ -602,6 +648,7 @@
             this.label17.Size = new System.Drawing.Size(70, 13);
             this.label17.TabIndex = 13;
             this.label17.Text = "Turn on Cliff: ";
+            this.toolTip.SetToolTip(this.label17, "If checked, the NPC will not walk off a cliff");
             // 
             // noBlockCb
             // 
@@ -631,6 +678,7 @@
             this.npcCollisionTop.Name = "npcCollisionTop";
             this.npcCollisionTop.Size = new System.Drawing.Size(15, 14);
             this.npcCollisionTop.TabIndex = 13;
+            this.toolTip.SetToolTip(this.npcCollisionTop, "If checked, then other NPC\'s can stand on this NPC like a block");
             this.npcCollisionTop.UseVisualStyleBackColor = true;
             // 
             // label11
@@ -641,6 +689,7 @@
             this.label11.Size = new System.Drawing.Size(95, 13);
             this.label11.TabIndex = 28;
             this.label11.Text = "NPC Collision Top:";
+            this.toolTip.SetToolTip(this.label11, "If checked, then other NPC\'s can stand on this NPC like a block");
             // 
             // npcCollisionCb
             // 
@@ -660,6 +709,7 @@
             this.npcCollision.Name = "npcCollision";
             this.npcCollision.Size = new System.Drawing.Size(15, 14);
             this.npcCollision.TabIndex = 12;
+            this.toolTip.SetToolTip(this.npcCollision, "If checked, then the NPC will act like a block to other NPC\'s");
             this.npcCollision.UseVisualStyleBackColor = true;
             // 
             // label10
@@ -670,6 +720,7 @@
             this.label10.Size = new System.Drawing.Size(73, 13);
             this.label10.TabIndex = 25;
             this.label10.Text = "NPC Collision:";
+            this.toolTip.SetToolTip(this.label10, "If checked, then the NPC will act like a block to other NPC\'s");
             // 
             // pCollisionTopCb
             // 
@@ -689,6 +740,7 @@
             this.pCollisionTop.Name = "pCollisionTop";
             this.pCollisionTop.Size = new System.Drawing.Size(15, 14);
             this.pCollisionTop.TabIndex = 11;
+            this.toolTip.SetToolTip(this.pCollisionTop, "If checked, then the player can stand on top of the NPC (like SMB2 Enemies)");
             this.pCollisionTop.UseVisualStyleBackColor = true;
             // 
             // label9
@@ -699,6 +751,7 @@
             this.label9.Size = new System.Drawing.Size(102, 13);
             this.label9.TabIndex = 22;
             this.label9.Text = "Player Collision Top:";
+            this.toolTip.SetToolTip(this.label9, "If checked, then the player can stand on top of the NPC (like SMB2 Enemies)");
             // 
             // pCollisionCb
             // 
@@ -718,6 +771,7 @@
             this.pCollision.Name = "pCollision";
             this.pCollision.Size = new System.Drawing.Size(15, 14);
             this.pCollision.TabIndex = 10;
+            this.toolTip.SetToolTip(this.pCollision, "If checked, the NPC will act like a block to the player");
             this.pCollision.UseVisualStyleBackColor = true;
             // 
             // label8
@@ -728,6 +782,7 @@
             this.label8.Size = new System.Drawing.Size(80, 13);
             this.label8.TabIndex = 19;
             this.label8.Text = "Player Collision:";
+            this.toolTip.SetToolTip(this.label8, "If checked, the NPC will act like a block to the player");
             // 
             // label5
             // 
@@ -737,6 +792,7 @@
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 18;
             this.label5.Text = "Width:";
+            this.toolTip.SetToolTip(this.label5, "The width, in pixels, of the in-game hitbox.");
             // 
             // pNpcHeight
             // 
@@ -750,6 +806,7 @@
             this.pNpcHeight.Name = "pNpcHeight";
             this.pNpcHeight.Size = new System.Drawing.Size(68, 20);
             this.pNpcHeight.TabIndex = 8;
+            this.toolTip.SetToolTip(this.pNpcHeight, "The height, in pixels, of the in-game hitbox.");
             // 
             // pNpcWidth
             // 
@@ -763,6 +820,7 @@
             this.pNpcWidth.Name = "pNpcWidth";
             this.pNpcWidth.Size = new System.Drawing.Size(68, 20);
             this.pNpcWidth.TabIndex = 9;
+            this.npcHeightTip.SetToolTip(this.pNpcWidth, "The width, in pixels, of the in-game hitbox.");
             // 
             // pNpcHeightCb
             // 
@@ -792,6 +850,7 @@
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 15;
             this.label6.Text = "Height:";
+            this.xOffsetTip.SetToolTip(this.label6, "The height, in pixels, of the in-game hitbox.");
             // 
             // groupBox3
             // 
@@ -826,6 +885,7 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // noFreezeCb
             // 
@@ -845,6 +905,7 @@
             this.noFreeze.Name = "noFreeze";
             this.noFreeze.Size = new System.Drawing.Size(15, 14);
             this.noFreeze.TabIndex = 25;
+            this.toolTip.SetToolTip(this.noFreeze, "If checked, then the NPC will be invulnerable to ice flowers.");
             this.noFreeze.UseVisualStyleBackColor = true;
             // 
             // label666
@@ -855,6 +916,7 @@
             this.label666.Size = new System.Drawing.Size(66, 13);
             this.label666.TabIndex = 40;
             this.label666.Text = "Can\'t freeze:";
+            this.toolTip.SetToolTip(this.label666, "If checked, then the NPC will be invulnerable to ice flowers.");
             // 
             // noFireballCb
             // 
@@ -874,6 +936,8 @@
             this.noFireball.Name = "noFireball";
             this.noFireball.Size = new System.Drawing.Size(15, 14);
             this.noFireball.TabIndex = 24;
+            this.toolTip.SetToolTip(this.noFireball, "If checked, then the NPC can\'t be killed by fireballs\r\n\r\nNOTE: Most SMB2 enemies " +
+                    "can be killed by fireballs\r\nif this value is left unchecked.");
             this.noFireball.UseVisualStyleBackColor = true;
             // 
             // label21
@@ -884,6 +948,8 @@
             this.label21.Size = new System.Drawing.Size(57, 13);
             this.label21.TabIndex = 37;
             this.label21.Text = "No fireball:";
+            this.toolTip.SetToolTip(this.label21, "If checked, then the NPC can\'t be killed by fireballs\r\n\r\nNOTE: Most SMB2 enemies " +
+                    "can be killed by fireballs\r\nif this value is left unchecked.");
             // 
             // speedCb
             // 
@@ -908,6 +974,7 @@
             this.speed.Name = "speed";
             this.speed.Size = new System.Drawing.Size(81, 20);
             this.speed.TabIndex = 23;
+            this.toolTip.SetToolTip(this.speed, resources.GetString("speed.ToolTip"));
             this.speed.Value = new decimal(new int[] {
             10,
             0,
@@ -922,6 +989,7 @@
             this.label20.Size = new System.Drawing.Size(41, 13);
             this.label20.TabIndex = 34;
             this.label20.Text = "Speed:";
+            this.xOffsetTip.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
             // 
             // noYoshiCb
             // 
@@ -941,6 +1009,7 @@
             this.noYoshi.Name = "noYoshi";
             this.noYoshi.Size = new System.Drawing.Size(15, 14);
             this.noYoshi.TabIndex = 22;
+            this.toolTip.SetToolTip(this.noYoshi, "If checked, then Yoshi will be unable to eat this NPC");
             this.noYoshi.UseVisualStyleBackColor = true;
             // 
             // label15
@@ -951,6 +1020,7 @@
             this.label15.Size = new System.Drawing.Size(58, 13);
             this.label15.TabIndex = 12;
             this.label15.Text = "Jump Hurt:";
+            this.toolTip.SetToolTip(this.label15, "If checked, Mario will take damage from jumping on this enemy.");
             // 
             // label18
             // 
@@ -960,6 +1030,7 @@
             this.label18.Size = new System.Drawing.Size(82, 13);
             this.label18.TabIndex = 31;
             this.label18.Text = "Can\'t be eaten: ";
+            this.toolTip.SetToolTip(this.label18, "If checked, then Yoshi will be unable to eat this NPC");
             // 
             // jumpHurtCb
             // 
@@ -979,6 +1050,7 @@
             this.jumpHurt.Name = "jumpHurt";
             this.jumpHurt.Size = new System.Drawing.Size(15, 14);
             this.jumpHurt.TabIndex = 20;
+            this.toolTip.SetToolTip(this.jumpHurt, "If checked, Mario will take damage from jumping on this enemy.");
             this.jumpHurt.UseVisualStyleBackColor = true;
             // 
             // label14
@@ -989,6 +1061,7 @@
             this.label14.Size = new System.Drawing.Size(58, 13);
             this.label14.TabIndex = 9;
             this.label14.Text = "Don\'t Hurt:";
+            this.toolTip.SetToolTip(this.label14, "If checked, then the NPC will not hurt you at all");
             // 
             // dontHurtCb
             // 
@@ -1008,6 +1081,7 @@
             this.dontHurt.Name = "dontHurt";
             this.dontHurt.Size = new System.Drawing.Size(15, 14);
             this.dontHurt.TabIndex = 21;
+            this.toolTip.SetToolTip(this.dontHurt, "If checked, then the NPC will not hurt you at all");
             this.dontHurt.UseVisualStyleBackColor = true;
             // 
             // grabTop
@@ -1018,6 +1092,7 @@
             this.grabTop.Name = "grabTop";
             this.grabTop.Size = new System.Drawing.Size(15, 14);
             this.grabTop.TabIndex = 19;
+            this.toolTip.SetToolTip(this.grabTop, "If checked, then this NPC can be picked up from the top (like SMB2 enemies)");
             this.grabTop.UseVisualStyleBackColor = true;
             // 
             // grabSide
@@ -1028,6 +1103,7 @@
             this.grabSide.Name = "grabSide";
             this.grabSide.Size = new System.Drawing.Size(15, 14);
             this.grabSide.TabIndex = 18;
+            this.toolTip.SetToolTip(this.grabSide, "If checked, then the NPC can be grabbed from the side");
             this.grabSide.UseVisualStyleBackColor = true;
             // 
             // label13
@@ -1038,6 +1114,7 @@
             this.label13.Size = new System.Drawing.Size(51, 13);
             this.label13.TabIndex = 4;
             this.label13.Text = "Grab top:";
+            this.toolTip.SetToolTip(this.label13, "If checked, then this NPC can be picked up from the top (like SMB2 enemies)");
             // 
             // label12
             // 
@@ -1047,6 +1124,7 @@
             this.label12.Size = new System.Drawing.Size(55, 13);
             this.label12.TabIndex = 3;
             this.label12.Text = "Grab side:";
+            this.toolTip.SetToolTip(this.label12, "If checked, then the NPC can be grabbed from the side");
             // 
             // scoreCb
             // 
@@ -1081,6 +1159,8 @@
             this.scoreList.Name = "scoreList";
             this.scoreList.Size = new System.Drawing.Size(81, 21);
             this.scoreList.TabIndex = 17;
+            this.toolTip.SetToolTip(this.scoreList, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
+                    "\'t get points");
             // 
             // label7
             // 
@@ -1090,6 +1170,8 @@
             this.label7.Size = new System.Drawing.Size(41, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Score: ";
+            this.framesTip.SetToolTip(this.label7, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
+                    "\'t get points");
             // 
             // grabSideCb
             // 
@@ -1111,18 +1193,126 @@
             this.grabTopCb.UseVisualStyleBackColor = true;
             this.grabTopCb.CheckedChanged += new System.EventHandler(this.grabTopCb_CheckedChanged);
             // 
-            // menuItem10
+            // groupBox4
             // 
-            this.menuItem10.Index = 2;
-            this.menuItem10.Text = "Changelog";
-            this.menuItem10.Click += new System.EventHandler(this.menuItem10_Click);
+            this.groupBox4.Controls.Add(this.pictureBox1);
+            this.groupBox4.Location = new System.Drawing.Point(682, 12);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(309, 250);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "NPC Animation";
+            this.npcAniTip.SetToolTip(this.groupBox4, "NPC Animation Code made by GhostHawk");
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 16);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(303, 231);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(913, 277);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Browse...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(766, 277);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(141, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Start";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(685, 277);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Stop";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // npcAniTip
+            // 
+            this.npcAniTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.npcAniTip.ToolTipTitle = "Information";
+            // 
+            // frameSpeedTip
+            // 
+            this.frameSpeedTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.frameSpeedTip.ToolTipTitle = "Information";
+            // 
+            // npcHeightTip
+            // 
+            this.npcHeightTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.npcHeightTip.ToolTipTitle = "Information";
+            // 
+            // npcWidthTip
+            // 
+            this.npcWidthTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.npcWidthTip.ToolTipTitle = "Information";
+            // 
+            // xOffsetTip
+            // 
+            this.xOffsetTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.xOffsetTip.ToolTipTitle = "Information";
+            // 
+            // yOffsetTip
+            // 
+            this.yOffsetTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.yOffsetTip.ToolTipTitle = "Information";
+            // 
+            // framesTip
+            // 
+            this.framesTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.framesTip.ToolTipTitle = "Information";
+            // 
+            // frameStyleTip
+            // 
+            this.frameStyleTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.frameStyleTip.ToolTipTitle = "Information";
+            // 
+            // foregroundTip
+            // 
+            this.foregroundTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.foregroundTip.ToolTipTitle = "Information";
+            // 
+            // toolTip
+            // 
+            this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip.ToolTipTitle = "Information";
             // 
             // Main
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 315);
+            this.ClientSize = new System.Drawing.Size(1003, 315);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.grabTopCb);
             this.Controls.Add(this.grabSideCb);
             this.Controls.Add(this.groupBox3);
@@ -1135,6 +1325,7 @@
             this.Name = "Main";
             this.Text = "SMBX NPC Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
             this.DragOver += new System.Windows.Forms.DragEventHandler(this.Main_DragOver);
@@ -1154,6 +1345,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1245,7 +1438,6 @@
         private System.Windows.Forms.CheckBox frameStyleCb;
         private System.Windows.Forms.ComboBox frameStyle;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.NumericUpDown frameSpeed;
         private System.Windows.Forms.CheckBox frameSpeedCb;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.MenuItem menuItem7;
@@ -1253,5 +1445,23 @@
         private System.Windows.Forms.MenuItem menuItem8;
         private System.Windows.Forms.MenuItem menuItem9;
         private System.Windows.Forms.MenuItem menuItem10;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.NumericUpDown frameSpeed;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolTip npcAniTip;
+        private System.Windows.Forms.ToolTip frameSpeedTip;
+        private System.Windows.Forms.ToolTip npcHeightTip;
+        private System.Windows.Forms.ToolTip npcWidthTip;
+        private System.Windows.Forms.ToolTip xOffsetTip;
+        private System.Windows.Forms.ToolTip yOffsetTip;
+        private System.Windows.Forms.ToolTip framesTip;
+        private System.Windows.Forms.ToolTip frameStyleTip;
+        private System.Windows.Forms.ToolTip foregroundTip;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

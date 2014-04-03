@@ -117,8 +117,122 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="frameSpeedTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>467, 17</value>
+  </metadata>
+  <data name="frameSpeed.ToolTip" xml:space="preserve">
+    <value>How fast the NPC animates
+
+Larger values are slower than the original, here are
+percentage values of the speed change:
+
+framespeed=1 - 800%
+framespeed=2 - 400%
+framespeed=3 - 267% (rounded)
+framespeed=4 - 200%
+framespeed=5 - 160%
+framespeed=6 - 133% (rounded)
+framespeed=7 - 114% (rounded)
+framespeed=8 - 100%
+framespeed=9 - 89% (rounded)
+framespeed=10 - 80%
+framespeed=11 - 73% (rounded)
+framespeed=12 - 67% (rounded)
+framespeed=13 - 62% (rounded)
+framespeed=14 - 57% (rounded)
+framespeed=15 - 53% (rounded)
+framespeed=16 - 50%</value>
+  </data>
+  <metadata name="foregroundTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>241, 54</value>
+  </metadata>
+  <data name="label25.ToolTip" xml:space="preserve">
+    <value>How fast the NPC animates. Also corresponds to the animation
+so uncheck the box if you don't want the speed to write
+
+Larger values are slower than the original, here are
+percentage values of the speed change:
+
+framespeed=1 - 800%
+framespeed=2 - 400%
+framespeed=3 - 267% (rounded)
+framespeed=4 - 200%
+framespeed=5 - 160%
+framespeed=6 - 133% (rounded)
+framespeed=7 - 114% (rounded)
+framespeed=8 - 100%
+framespeed=9 - 89% (rounded)
+framespeed=10 - 80%
+framespeed=11 - 73% (rounded)
+framespeed=12 - 67% (rounded)
+framespeed=13 - 62% (rounded)
+framespeed=14 - 57% (rounded)
+framespeed=15 - 53% (rounded)
+framespeed=16 - 50%</value>
+  </data>
+  <metadata name="framesTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
+  <metadata name="frameStyleTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>114, 56</value>
+  </metadata>
+  <data name="frameStyle.ToolTip" xml:space="preserve">
+    <value>Single Sprite = acts like a goomba (left and right movement use the same sprite)
+Left/Right Sprite = has seperate sprites for left and right. First half is for left, other half is for right
+Left/Right/Upside = has left and right movement AND sprits for when is grabbed (like SMB2 enemies)</value>
+  </data>
+  <data name="label24.ToolTip" xml:space="preserve">
+    <value>Single Sprite = acts like a goomba (left and right movement use the same sprite)
+Left/Right Sprite = has seperate sprites for left and right. First half is for left, other half is for right
+Left/Right/Upside = has left and right movement AND sprits for when is grabbed (like SMB2 enemies)</value>
+  </data>
+  <metadata name="npcAniTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>361, 17</value>
+  </metadata>
+  <metadata name="yOffsetTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>357, 52</value>
+  </metadata>
+  <metadata name="xOffsetTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>795, 17</value>
+  </metadata>
+  <metadata name="npcHeightTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>601, 17</value>
+  </metadata>
+  <metadata name="npcWidthTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>698, 17</value>
+  </metadata>
   <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>464, 52</value>
+  </metadata>
+  <data name="speed.ToolTip" xml:space="preserve">
+    <value>The multiplier by which the NPC will move by
+
+A value of 0 will cause the NPC to stand still
+A value of 1 will not change the original movement
+A value of 2 will change the speed times 2, etc
+
+Also, a negative value will cause the NPC to move backwards</value>
+  </data>
+  <data name="label20.ToolTip" xml:space="preserve">
+    <value>The multiplier by which the NPC will move by
+
+A value of 0 will cause the NPC to stand still
+A value of 1 will not change the original movement
+A value of 2 will change the speed times 2, etc
+
+Also, a negative value will cause the NPC to move backwards</value>
+  </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>134, 17</value>
+  </metadata>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>221, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>166</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
