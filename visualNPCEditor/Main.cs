@@ -49,30 +49,35 @@ namespace visualNPCEditor
             if (of.ShowDialog() == DialogResult.OK)
             {
                 readFile(of.FileName);
-            }
-            string name = Path.GetFileNameWithoutExtension(of.FileName);
-            string path = Path.GetDirectoryName(of.FileName);
-            string nameWGif = path + @"\" + name + ".gif";
+                string name = Path.GetFileNameWithoutExtension(of.FileName);
+                string path = Path.GetDirectoryName(of.FileName);
+                string nameWGif = path + @"\" + name + ".gif";
 
-            if(File.Exists(nameWGif))
-            {
-                try
+                if (File.Exists(nameWGif))
                 {
-                    showSprite(nameWGif);
-                    this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
+                    try
+                    {
+                        showSprite(nameWGif);
+                        this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Unable to create animation: " + ex.Message);
+                        MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine("Unable to create animation: " + ex.Message);
-                    MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName);
                 }
+                hasSaved = true;
+                workingFile = of.FileName;
             }
             else
             {
-                this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName);
+                //nice try
             }
-            hasSaved = true;
-            workingFile = of.FileName;
+            
         }
         #region Events
         private void scoreCb_CheckedChanged(object sender, EventArgs e)
@@ -1340,7 +1345,7 @@ namespace visualNPCEditor
                 else
                 {
                     framesSpeed = Convert.ToInt32(1);
-                    frameSpeed.Value = 1;
+                    frameSpeed.Value = 8;
                 }
                 bmp = new Bitmap(gfxWidth, gfxHeight);   
                 int caseSwitch = framesSpeed;

@@ -118,7 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>---1.2.0.0---
+    <value>---1.2.0.1---
+-Fixed a bug where clicking the cancel button on the open file box would cause the program to throw an
+ exception
+-Fixed a bug where not having a framespeed value would make it default to 1. This resulted in a sonic fast
+ sprite preview!
+
+---1.2.0.0---
 -Added support for animating an NPC (thanks a bunch GhostHawk!)
 -Tries to automatically find the corresponding image in the same directory as .TXT
 -Can edit how fast the NPC is animated with the "Frames Speed" checkbox
