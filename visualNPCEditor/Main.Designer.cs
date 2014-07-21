@@ -139,6 +139,9 @@
             this.frameStyleTip = new System.Windows.Forms.ToolTip(this.components);
             this.foregroundTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.defaultNpc = new System.Windows.Forms.Label();
+            this.menuItem11 = new System.Windows.Forms.MenuItem();
+            this.menuItem12 = new System.Windows.Forms.MenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frames)).BeginInit();
@@ -181,9 +184,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.npcHeight);
             this.groupBox1.Controls.Add(this.npcHCb);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(14, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(225, 288);
+            this.groupBox1.Size = new System.Drawing.Size(262, 332);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Graphics";
@@ -191,21 +194,21 @@
             // frameSpeed
             // 
             this.frameSpeed.Enabled = false;
-            this.frameSpeed.Location = new System.Drawing.Point(78, 170);
+            this.frameSpeed.Location = new System.Drawing.Point(91, 196);
             this.frameSpeed.Maximum = new decimal(new int[] {
             16,
             0,
             0,
             0});
             this.frameSpeed.Name = "frameSpeed";
-            this.frameSpeed.Size = new System.Drawing.Size(115, 20);
+            this.frameSpeed.Size = new System.Drawing.Size(134, 23);
             this.frameSpeed.TabIndex = 5;
             this.frameSpeedTip.SetToolTip(this.frameSpeed, resources.GetString("frameSpeed.ToolTip"));
             // 
             // frameSpeedCb
             // 
             this.frameSpeedCb.AutoSize = true;
-            this.frameSpeedCb.Location = new System.Drawing.Point(204, 172);
+            this.frameSpeedCb.Location = new System.Drawing.Point(238, 198);
             this.frameSpeedCb.Name = "frameSpeedCb";
             this.frameSpeedCb.Size = new System.Drawing.Size(15, 14);
             this.frameSpeedCb.TabIndex = 47;
@@ -215,9 +218,9 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(6, 173);
+            this.label25.Location = new System.Drawing.Point(7, 200);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(73, 13);
+            this.label25.Size = new System.Drawing.Size(78, 15);
             this.label25.TabIndex = 46;
             this.label25.Text = "Frame Speed:";
             this.foregroundTip.SetToolTip(this.label25, resources.GetString("label25.ToolTip"));
@@ -225,7 +228,7 @@
             // frameStyleCb
             // 
             this.frameStyleCb.AutoSize = true;
-            this.frameStyleCb.Location = new System.Drawing.Point(204, 200);
+            this.frameStyleCb.Location = new System.Drawing.Point(238, 231);
             this.frameStyleCb.Name = "frameStyleCb";
             this.frameStyleCb.Size = new System.Drawing.Size(15, 14);
             this.frameStyleCb.TabIndex = 45;
@@ -235,9 +238,9 @@
             // frames
             // 
             this.frames.Enabled = false;
-            this.frames.Location = new System.Drawing.Point(78, 140);
+            this.frames.Location = new System.Drawing.Point(91, 162);
             this.frames.Name = "frames";
-            this.frames.Size = new System.Drawing.Size(115, 20);
+            this.frames.Size = new System.Drawing.Size(134, 23);
             this.frames.TabIndex = 4;
             this.framesTip.SetToolTip(this.frames, "The number of frames the NPC has.");
             // 
@@ -250,18 +253,18 @@
             "Single Sprite",
             "Left/Right Sprites",
             "Left/Right/Upside Down Sprites"});
-            this.frameStyle.Location = new System.Drawing.Point(78, 196);
+            this.frameStyle.Location = new System.Drawing.Point(91, 226);
             this.frameStyle.Name = "frameStyle";
-            this.frameStyle.Size = new System.Drawing.Size(115, 21);
+            this.frameStyle.Size = new System.Drawing.Size(133, 23);
             this.frameStyle.TabIndex = 6;
             this.frameStyleTip.SetToolTip(this.frameStyle, resources.GetString("frameStyle.ToolTip"));
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(9, 199);
+            this.label24.Location = new System.Drawing.Point(10, 230);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(60, 13);
+            this.label24.Size = new System.Drawing.Size(67, 15);
             this.label24.TabIndex = 43;
             this.label24.Text = "Framestyle:";
             this.frameStyleTip.SetToolTip(this.label24, resources.GetString("label24.ToolTip"));
@@ -269,7 +272,7 @@
             // framesCb
             // 
             this.framesCb.AutoSize = true;
-            this.framesCb.Location = new System.Drawing.Point(204, 142);
+            this.framesCb.Location = new System.Drawing.Point(238, 164);
             this.framesCb.Name = "framesCb";
             this.framesCb.Size = new System.Drawing.Size(15, 14);
             this.framesCb.TabIndex = 17;
@@ -279,9 +282,9 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(28, 141);
+            this.label23.Location = new System.Drawing.Point(33, 163);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(44, 13);
+            this.label23.Size = new System.Drawing.Size(48, 15);
             this.label23.TabIndex = 16;
             this.label23.Text = "Frames:";
             this.frameStyleTip.SetToolTip(this.label23, "The number of frames the NPC has.");
@@ -289,7 +292,7 @@
             // foregroundCb
             // 
             this.foregroundCb.AutoSize = true;
-            this.foregroundCb.Location = new System.Drawing.Point(204, 224);
+            this.foregroundCb.Location = new System.Drawing.Point(238, 258);
             this.foregroundCb.Name = "foregroundCb";
             this.foregroundCb.Size = new System.Drawing.Size(15, 14);
             this.foregroundCb.TabIndex = 15;
@@ -300,7 +303,7 @@
             // 
             this.foreground.AutoSize = true;
             this.foreground.Enabled = false;
-            this.foreground.Location = new System.Drawing.Point(78, 224);
+            this.foreground.Location = new System.Drawing.Point(91, 258);
             this.foreground.Name = "foreground";
             this.foreground.Size = new System.Drawing.Size(15, 14);
             this.foreground.TabIndex = 7;
@@ -310,9 +313,9 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(9, 225);
+            this.label19.Location = new System.Drawing.Point(10, 260);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(64, 13);
+            this.label19.Size = new System.Drawing.Size(72, 15);
             this.label19.TabIndex = 13;
             this.label19.Text = "Foreground:";
             this.npcAniTip.SetToolTip(this.label19, "If checked, the NPC will be shown in front of everything");
@@ -320,21 +323,21 @@
             // yOffset
             // 
             this.yOffset.Enabled = false;
-            this.yOffset.Location = new System.Drawing.Point(78, 111);
+            this.yOffset.Location = new System.Drawing.Point(91, 128);
             this.yOffset.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.yOffset.Name = "yOffset";
-            this.yOffset.Size = new System.Drawing.Size(115, 20);
+            this.yOffset.Size = new System.Drawing.Size(134, 23);
             this.yOffset.TabIndex = 4;
             this.yOffsetTip.SetToolTip(this.yOffset, "Moves the graphic in the Y direction");
             // 
             // yOffsetCb
             // 
             this.yOffsetCb.AutoSize = true;
-            this.yOffsetCb.Location = new System.Drawing.Point(204, 113);
+            this.yOffsetCb.Location = new System.Drawing.Point(238, 130);
             this.yOffsetCb.Name = "yOffsetCb";
             this.yOffsetCb.Size = new System.Drawing.Size(15, 14);
             this.yOffsetCb.TabIndex = 11;
@@ -344,21 +347,21 @@
             // xOffset
             // 
             this.xOffset.Enabled = false;
-            this.xOffset.Location = new System.Drawing.Point(78, 82);
+            this.xOffset.Location = new System.Drawing.Point(91, 95);
             this.xOffset.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.xOffset.Name = "xOffset";
-            this.xOffset.Size = new System.Drawing.Size(115, 20);
+            this.xOffset.Size = new System.Drawing.Size(134, 23);
             this.xOffset.TabIndex = 3;
             this.xOffsetTip.SetToolTip(this.xOffset, "Moves the graphic in the X direction");
             // 
             // xOffsetCb
             // 
             this.xOffsetCb.AutoSize = true;
-            this.xOffsetCb.Location = new System.Drawing.Point(204, 84);
+            this.xOffsetCb.Location = new System.Drawing.Point(238, 97);
             this.xOffsetCb.Name = "xOffsetCb";
             this.xOffsetCb.Size = new System.Drawing.Size(15, 14);
             this.xOffsetCb.TabIndex = 9;
@@ -368,9 +371,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 111);
+            this.label4.Location = new System.Drawing.Point(33, 128);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 8;
             this.label4.Text = "Y Offset:";
             this.yOffsetTip.SetToolTip(this.label4, "Moves the graphic in the Y direction");
@@ -378,9 +381,9 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 84);
+            this.label3.Location = new System.Drawing.Point(33, 97);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 13);
+            this.label3.Size = new System.Drawing.Size(52, 15);
             this.label3.TabIndex = 7;
             this.label3.Text = "X Offset:";
             this.npcHeightTip.SetToolTip(this.label3, "Moves the graphic in the X direction");
@@ -388,9 +391,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 54);
+            this.label2.Location = new System.Drawing.Point(40, 62);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.Size = new System.Drawing.Size(42, 15);
             this.label2.TabIndex = 6;
             this.label2.Text = "Width:";
             this.npcWidthTip.SetToolTip(this.label2, "The width, in pixels, of the NPC. Not related to physics");
@@ -398,21 +401,21 @@
             // npcWidth
             // 
             this.npcWidth.Enabled = false;
-            this.npcWidth.Location = new System.Drawing.Point(78, 52);
+            this.npcWidth.Location = new System.Drawing.Point(91, 60);
             this.npcWidth.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
             this.npcWidth.Name = "npcWidth";
-            this.npcWidth.Size = new System.Drawing.Size(115, 20);
+            this.npcWidth.Size = new System.Drawing.Size(134, 23);
             this.npcWidth.TabIndex = 2;
             this.npcHeightTip.SetToolTip(this.npcWidth, "The width, in pixels, of the NPC. Not related to physics");
             // 
             // npcWCb
             // 
             this.npcWCb.AutoSize = true;
-            this.npcWCb.Location = new System.Drawing.Point(204, 54);
+            this.npcWCb.Location = new System.Drawing.Point(238, 62);
             this.npcWCb.Name = "npcWCb";
             this.npcWCb.Size = new System.Drawing.Size(15, 14);
             this.npcWCb.TabIndex = 4;
@@ -422,9 +425,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 25);
+            this.label1.Location = new System.Drawing.Point(36, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(46, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "Height:";
             this.npcHeightTip.SetToolTip(this.label1, "The height, in pixels, of the NPC. Not related to the physics.");
@@ -432,21 +435,21 @@
             // npcHeight
             // 
             this.npcHeight.Enabled = false;
-            this.npcHeight.Location = new System.Drawing.Point(78, 23);
+            this.npcHeight.Location = new System.Drawing.Point(91, 27);
             this.npcHeight.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
             this.npcHeight.Name = "npcHeight";
-            this.npcHeight.Size = new System.Drawing.Size(115, 20);
+            this.npcHeight.Size = new System.Drawing.Size(134, 23);
             this.npcHeight.TabIndex = 1;
             this.xOffsetTip.SetToolTip(this.npcHeight, "The height, in pixels, of the NPC. Not related to the physics.");
             // 
             // npcHCb
             // 
             this.npcHCb.AutoSize = true;
-            this.npcHCb.Location = new System.Drawing.Point(204, 25);
+            this.npcHCb.Location = new System.Drawing.Point(238, 29);
             this.npcHCb.Name = "npcHCb";
             this.npcHCb.Size = new System.Drawing.Size(15, 14);
             this.npcHCb.TabIndex = 1;
@@ -457,6 +460,7 @@
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem1,
+            this.menuItem11,
             this.menuItem6});
             // 
             // menuItem1
@@ -506,7 +510,7 @@
             // 
             // menuItem6
             // 
-            this.menuItem6.Index = 1;
+            this.menuItem6.Index = 2;
             this.menuItem6.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem8,
             this.menuItem9,
@@ -560,9 +564,9 @@
             this.groupBox2.Controls.Add(this.pNpcHeightCb);
             this.groupBox2.Controls.Add(this.pNpcWidthCb);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(240, 12);
+            this.groupBox2.Location = new System.Drawing.Point(280, 35);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(214, 288);
+            this.groupBox2.Size = new System.Drawing.Size(250, 332);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Physics Related";
@@ -570,7 +574,7 @@
             // noGravityCb
             // 
             this.noGravityCb.AutoSize = true;
-            this.noGravityCb.Location = new System.Drawing.Point(144, 249);
+            this.noGravityCb.Location = new System.Drawing.Point(168, 287);
             this.noGravityCb.Name = "noGravityCb";
             this.noGravityCb.Size = new System.Drawing.Size(15, 14);
             this.noGravityCb.TabIndex = 45;
@@ -581,7 +585,7 @@
             // 
             this.noGravity.AutoSize = true;
             this.noGravity.Enabled = false;
-            this.noGravity.Location = new System.Drawing.Point(114, 249);
+            this.noGravity.Location = new System.Drawing.Point(133, 287);
             this.noGravity.Name = "noGravity";
             this.noGravity.Size = new System.Drawing.Size(15, 14);
             this.noGravity.TabIndex = 16;
@@ -591,9 +595,9 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(41, 249);
+            this.label22.Location = new System.Drawing.Point(48, 287);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(60, 13);
+            this.label22.Size = new System.Drawing.Size(66, 15);
             this.label22.TabIndex = 43;
             this.label22.Text = "No Gravity:";
             this.toolTip.SetToolTip(this.label22, "If checked, the NPC won\'t obey gravity/walks mid-air");
@@ -601,7 +605,7 @@
             // cliffTurnCb
             // 
             this.cliffTurnCb.AutoSize = true;
-            this.cliffTurnCb.Location = new System.Drawing.Point(144, 222);
+            this.cliffTurnCb.Location = new System.Drawing.Point(168, 256);
             this.cliffTurnCb.Name = "cliffTurnCb";
             this.cliffTurnCb.Size = new System.Drawing.Size(15, 14);
             this.cliffTurnCb.TabIndex = 15;
@@ -611,9 +615,9 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 192);
+            this.label16.Location = new System.Drawing.Point(7, 222);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(95, 13);
+            this.label16.Size = new System.Drawing.Size(107, 15);
             this.label16.TabIndex = 13;
             this.label16.Text = "No Block Collision:";
             this.toolTip.SetToolTip(this.label16, "If checked, the NPC will not clip through blocks (pass through like a ghost)");
@@ -622,7 +626,7 @@
             // 
             this.cliffTurn.AutoSize = true;
             this.cliffTurn.Enabled = false;
-            this.cliffTurn.Location = new System.Drawing.Point(114, 222);
+            this.cliffTurn.Location = new System.Drawing.Point(133, 256);
             this.cliffTurn.Name = "cliffTurn";
             this.cliffTurn.Size = new System.Drawing.Size(15, 14);
             this.cliffTurn.TabIndex = 15;
@@ -633,7 +637,7 @@
             // 
             this.noBlockCollision.AutoSize = true;
             this.noBlockCollision.Enabled = false;
-            this.noBlockCollision.Location = new System.Drawing.Point(114, 192);
+            this.noBlockCollision.Location = new System.Drawing.Point(133, 222);
             this.noBlockCollision.Name = "noBlockCollision";
             this.noBlockCollision.Size = new System.Drawing.Size(15, 14);
             this.noBlockCollision.TabIndex = 14;
@@ -643,9 +647,9 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(33, 222);
+            this.label17.Location = new System.Drawing.Point(38, 256);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(70, 13);
+            this.label17.Size = new System.Drawing.Size(80, 15);
             this.label17.TabIndex = 13;
             this.label17.Text = "Turn on Cliff: ";
             this.toolTip.SetToolTip(this.label17, "If checked, the NPC will not walk off a cliff");
@@ -653,7 +657,7 @@
             // noBlockCb
             // 
             this.noBlockCb.AutoSize = true;
-            this.noBlockCb.Location = new System.Drawing.Point(144, 192);
+            this.noBlockCb.Location = new System.Drawing.Point(168, 222);
             this.noBlockCb.Name = "noBlockCb";
             this.noBlockCb.Size = new System.Drawing.Size(15, 14);
             this.noBlockCb.TabIndex = 15;
@@ -663,7 +667,7 @@
             // npcCollisionTopCb
             // 
             this.npcCollisionTopCb.AutoSize = true;
-            this.npcCollisionTopCb.Location = new System.Drawing.Point(144, 166);
+            this.npcCollisionTopCb.Location = new System.Drawing.Point(168, 192);
             this.npcCollisionTopCb.Name = "npcCollisionTopCb";
             this.npcCollisionTopCb.Size = new System.Drawing.Size(15, 14);
             this.npcCollisionTopCb.TabIndex = 30;
@@ -674,7 +678,7 @@
             // 
             this.npcCollisionTop.AutoSize = true;
             this.npcCollisionTop.Enabled = false;
-            this.npcCollisionTop.Location = new System.Drawing.Point(114, 166);
+            this.npcCollisionTop.Location = new System.Drawing.Point(133, 192);
             this.npcCollisionTop.Name = "npcCollisionTop";
             this.npcCollisionTop.Size = new System.Drawing.Size(15, 14);
             this.npcCollisionTop.TabIndex = 13;
@@ -684,9 +688,9 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 166);
+            this.label11.Location = new System.Drawing.Point(7, 192);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(95, 13);
+            this.label11.Size = new System.Drawing.Size(107, 15);
             this.label11.TabIndex = 28;
             this.label11.Text = "NPC Collision Top:";
             this.toolTip.SetToolTip(this.label11, "If checked, then other NPC\'s can stand on this NPC like a block");
@@ -694,7 +698,7 @@
             // npcCollisionCb
             // 
             this.npcCollisionCb.AutoSize = true;
-            this.npcCollisionCb.Location = new System.Drawing.Point(144, 139);
+            this.npcCollisionCb.Location = new System.Drawing.Point(168, 160);
             this.npcCollisionCb.Name = "npcCollisionCb";
             this.npcCollisionCb.Size = new System.Drawing.Size(15, 14);
             this.npcCollisionCb.TabIndex = 27;
@@ -705,7 +709,7 @@
             // 
             this.npcCollision.AutoSize = true;
             this.npcCollision.Enabled = false;
-            this.npcCollision.Location = new System.Drawing.Point(114, 139);
+            this.npcCollision.Location = new System.Drawing.Point(133, 160);
             this.npcCollision.Name = "npcCollision";
             this.npcCollision.Size = new System.Drawing.Size(15, 14);
             this.npcCollision.TabIndex = 12;
@@ -715,9 +719,9 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(28, 139);
+            this.label10.Location = new System.Drawing.Point(33, 160);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(73, 13);
+            this.label10.Size = new System.Drawing.Size(83, 15);
             this.label10.TabIndex = 25;
             this.label10.Text = "NPC Collision:";
             this.toolTip.SetToolTip(this.label10, "If checked, then the NPC will act like a block to other NPC\'s");
@@ -725,7 +729,7 @@
             // pCollisionTopCb
             // 
             this.pCollisionTopCb.AutoSize = true;
-            this.pCollisionTopCb.Location = new System.Drawing.Point(144, 109);
+            this.pCollisionTopCb.Location = new System.Drawing.Point(168, 126);
             this.pCollisionTopCb.Name = "pCollisionTopCb";
             this.pCollisionTopCb.Size = new System.Drawing.Size(15, 14);
             this.pCollisionTopCb.TabIndex = 24;
@@ -736,7 +740,7 @@
             // 
             this.pCollisionTop.AutoSize = true;
             this.pCollisionTop.Enabled = false;
-            this.pCollisionTop.Location = new System.Drawing.Point(114, 110);
+            this.pCollisionTop.Location = new System.Drawing.Point(133, 127);
             this.pCollisionTop.Name = "pCollisionTop";
             this.pCollisionTop.Size = new System.Drawing.Size(15, 14);
             this.pCollisionTop.TabIndex = 11;
@@ -746,9 +750,9 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1, 109);
+            this.label9.Location = new System.Drawing.Point(1, 126);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 13);
+            this.label9.Size = new System.Drawing.Size(115, 15);
             this.label9.TabIndex = 22;
             this.label9.Text = "Player Collision Top:";
             this.toolTip.SetToolTip(this.label9, "If checked, then the player can stand on top of the NPC (like SMB2 Enemies)");
@@ -756,7 +760,7 @@
             // pCollisionCb
             // 
             this.pCollisionCb.AutoSize = true;
-            this.pCollisionCb.Location = new System.Drawing.Point(144, 82);
+            this.pCollisionCb.Location = new System.Drawing.Point(168, 95);
             this.pCollisionCb.Name = "pCollisionCb";
             this.pCollisionCb.Size = new System.Drawing.Size(15, 14);
             this.pCollisionCb.TabIndex = 21;
@@ -767,7 +771,7 @@
             // 
             this.pCollision.AutoSize = true;
             this.pCollision.Enabled = false;
-            this.pCollision.Location = new System.Drawing.Point(114, 82);
+            this.pCollision.Location = new System.Drawing.Point(133, 95);
             this.pCollision.Name = "pCollision";
             this.pCollision.Size = new System.Drawing.Size(15, 14);
             this.pCollision.TabIndex = 10;
@@ -777,9 +781,9 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 82);
+            this.label8.Location = new System.Drawing.Point(27, 95);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 13);
+            this.label8.Size = new System.Drawing.Size(91, 15);
             this.label8.TabIndex = 19;
             this.label8.Text = "Player Collision:";
             this.toolTip.SetToolTip(this.label8, "If checked, the NPC will act like a block to the player");
@@ -787,9 +791,9 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 52);
+            this.label5.Location = new System.Drawing.Point(27, 60);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.Size = new System.Drawing.Size(42, 15);
             this.label5.TabIndex = 18;
             this.label5.Text = "Width:";
             this.toolTip.SetToolTip(this.label5, "The width, in pixels, of the in-game hitbox.");
@@ -797,35 +801,35 @@
             // pNpcHeight
             // 
             this.pNpcHeight.Enabled = false;
-            this.pNpcHeight.Location = new System.Drawing.Point(70, 21);
+            this.pNpcHeight.Location = new System.Drawing.Point(82, 24);
             this.pNpcHeight.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
             this.pNpcHeight.Name = "pNpcHeight";
-            this.pNpcHeight.Size = new System.Drawing.Size(68, 20);
+            this.pNpcHeight.Size = new System.Drawing.Size(79, 23);
             this.pNpcHeight.TabIndex = 8;
             this.toolTip.SetToolTip(this.pNpcHeight, "The height, in pixels, of the in-game hitbox.");
             // 
             // pNpcWidth
             // 
             this.pNpcWidth.Enabled = false;
-            this.pNpcWidth.Location = new System.Drawing.Point(70, 50);
+            this.pNpcWidth.Location = new System.Drawing.Point(82, 58);
             this.pNpcWidth.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
             this.pNpcWidth.Name = "pNpcWidth";
-            this.pNpcWidth.Size = new System.Drawing.Size(68, 20);
+            this.pNpcWidth.Size = new System.Drawing.Size(79, 23);
             this.pNpcWidth.TabIndex = 9;
             this.npcHeightTip.SetToolTip(this.pNpcWidth, "The width, in pixels, of the in-game hitbox.");
             // 
             // pNpcHeightCb
             // 
             this.pNpcHeightCb.AutoSize = true;
-            this.pNpcHeightCb.Location = new System.Drawing.Point(144, 23);
+            this.pNpcHeightCb.Location = new System.Drawing.Point(168, 27);
             this.pNpcHeightCb.Name = "pNpcHeightCb";
             this.pNpcHeightCb.Size = new System.Drawing.Size(15, 14);
             this.pNpcHeightCb.TabIndex = 13;
@@ -835,7 +839,7 @@
             // pNpcWidthCb
             // 
             this.pNpcWidthCb.AutoSize = true;
-            this.pNpcWidthCb.Location = new System.Drawing.Point(144, 52);
+            this.pNpcWidthCb.Location = new System.Drawing.Point(168, 60);
             this.pNpcWidthCb.Name = "pNpcWidthCb";
             this.pNpcWidthCb.Size = new System.Drawing.Size(15, 14);
             this.pNpcWidthCb.TabIndex = 16;
@@ -845,9 +849,9 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 24);
+            this.label6.Location = new System.Drawing.Point(23, 28);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 13);
+            this.label6.Size = new System.Drawing.Size(46, 15);
             this.label6.TabIndex = 15;
             this.label6.Text = "Height:";
             this.xOffsetTip.SetToolTip(this.label6, "The height, in pixels, of the in-game hitbox.");
@@ -879,9 +883,9 @@
             this.groupBox3.Controls.Add(this.scoreCb);
             this.groupBox3.Controls.Add(this.scoreList);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Location = new System.Drawing.Point(458, 12);
+            this.groupBox3.Location = new System.Drawing.Point(534, 35);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(218, 288);
+            this.groupBox3.Size = new System.Drawing.Size(254, 332);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game";
@@ -890,7 +894,7 @@
             // noFreezeCb
             // 
             this.noFreezeCb.AutoSize = true;
-            this.noFreezeCb.Location = new System.Drawing.Point(181, 249);
+            this.noFreezeCb.Location = new System.Drawing.Point(211, 287);
             this.noFreezeCb.Name = "noFreezeCb";
             this.noFreezeCb.Size = new System.Drawing.Size(15, 14);
             this.noFreezeCb.TabIndex = 42;
@@ -901,7 +905,7 @@
             // 
             this.noFreeze.AutoSize = true;
             this.noFreeze.Enabled = false;
-            this.noFreeze.Location = new System.Drawing.Point(94, 249);
+            this.noFreeze.Location = new System.Drawing.Point(110, 287);
             this.noFreeze.Name = "noFreeze";
             this.noFreeze.Size = new System.Drawing.Size(15, 14);
             this.noFreeze.TabIndex = 25;
@@ -911,9 +915,9 @@
             // label666
             // 
             this.label666.AutoSize = true;
-            this.label666.Location = new System.Drawing.Point(19, 249);
+            this.label666.Location = new System.Drawing.Point(22, 287);
             this.label666.Name = "label666";
-            this.label666.Size = new System.Drawing.Size(66, 13);
+            this.label666.Size = new System.Drawing.Size(72, 15);
             this.label666.TabIndex = 40;
             this.label666.Text = "Can\'t freeze:";
             this.toolTip.SetToolTip(this.label666, "If checked, then the NPC will be invulnerable to ice flowers.");
@@ -921,7 +925,7 @@
             // noFireballCb
             // 
             this.noFireballCb.AutoSize = true;
-            this.noFireballCb.Location = new System.Drawing.Point(181, 222);
+            this.noFireballCb.Location = new System.Drawing.Point(211, 256);
             this.noFireballCb.Name = "noFireballCb";
             this.noFireballCb.Size = new System.Drawing.Size(15, 14);
             this.noFireballCb.TabIndex = 39;
@@ -932,7 +936,7 @@
             // 
             this.noFireball.AutoSize = true;
             this.noFireball.Enabled = false;
-            this.noFireball.Location = new System.Drawing.Point(94, 222);
+            this.noFireball.Location = new System.Drawing.Point(110, 256);
             this.noFireball.Name = "noFireball";
             this.noFireball.Size = new System.Drawing.Size(15, 14);
             this.noFireball.TabIndex = 24;
@@ -943,9 +947,9 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(31, 222);
+            this.label21.Location = new System.Drawing.Point(36, 256);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(57, 13);
+            this.label21.Size = new System.Drawing.Size(65, 15);
             this.label21.TabIndex = 37;
             this.label21.Text = "No fireball:";
             this.toolTip.SetToolTip(this.label21, "If checked, then the NPC can\'t be killed by fireballs\r\n\r\nNOTE: Most SMB2 enemies " +
@@ -954,7 +958,7 @@
             // speedCb
             // 
             this.speedCb.AutoSize = true;
-            this.speedCb.Location = new System.Drawing.Point(181, 193);
+            this.speedCb.Location = new System.Drawing.Point(211, 223);
             this.speedCb.Name = "speedCb";
             this.speedCb.Size = new System.Drawing.Size(15, 14);
             this.speedCb.TabIndex = 36;
@@ -970,9 +974,9 @@
             0,
             0,
             131072});
-            this.speed.Location = new System.Drawing.Point(94, 190);
+            this.speed.Location = new System.Drawing.Point(110, 219);
             this.speed.Name = "speed";
-            this.speed.Size = new System.Drawing.Size(81, 20);
+            this.speed.Size = new System.Drawing.Size(94, 23);
             this.speed.TabIndex = 23;
             this.toolTip.SetToolTip(this.speed, resources.GetString("speed.ToolTip"));
             this.speed.Value = new decimal(new int[] {
@@ -984,9 +988,9 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(47, 194);
+            this.label20.Location = new System.Drawing.Point(55, 224);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(41, 13);
+            this.label20.Size = new System.Drawing.Size(42, 15);
             this.label20.TabIndex = 34;
             this.label20.Text = "Speed:";
             this.xOffsetTip.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
@@ -994,7 +998,7 @@
             // noYoshiCb
             // 
             this.noYoshiCb.AutoSize = true;
-            this.noYoshiCb.Location = new System.Drawing.Point(181, 167);
+            this.noYoshiCb.Location = new System.Drawing.Point(211, 193);
             this.noYoshiCb.Name = "noYoshiCb";
             this.noYoshiCb.Size = new System.Drawing.Size(15, 14);
             this.noYoshiCb.TabIndex = 33;
@@ -1005,7 +1009,7 @@
             // 
             this.noYoshi.AutoSize = true;
             this.noYoshi.Enabled = false;
-            this.noYoshi.Location = new System.Drawing.Point(94, 167);
+            this.noYoshi.Location = new System.Drawing.Point(110, 193);
             this.noYoshi.Name = "noYoshi";
             this.noYoshi.Size = new System.Drawing.Size(15, 14);
             this.noYoshi.TabIndex = 22;
@@ -1015,9 +1019,9 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(30, 109);
+            this.label15.Location = new System.Drawing.Point(35, 126);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(58, 13);
+            this.label15.Size = new System.Drawing.Size(66, 15);
             this.label15.TabIndex = 12;
             this.label15.Text = "Jump Hurt:";
             this.toolTip.SetToolTip(this.label15, "If checked, Mario will take damage from jumping on this enemy.");
@@ -1025,9 +1029,9 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(10, 168);
+            this.label18.Location = new System.Drawing.Point(12, 194);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(82, 13);
+            this.label18.Size = new System.Drawing.Size(89, 15);
             this.label18.TabIndex = 31;
             this.label18.Text = "Can\'t be eaten: ";
             this.toolTip.SetToolTip(this.label18, "If checked, then Yoshi will be unable to eat this NPC");
@@ -1035,7 +1039,7 @@
             // jumpHurtCb
             // 
             this.jumpHurtCb.AutoSize = true;
-            this.jumpHurtCb.Location = new System.Drawing.Point(181, 110);
+            this.jumpHurtCb.Location = new System.Drawing.Point(211, 127);
             this.jumpHurtCb.Name = "jumpHurtCb";
             this.jumpHurtCb.Size = new System.Drawing.Size(15, 14);
             this.jumpHurtCb.TabIndex = 11;
@@ -1046,7 +1050,7 @@
             // 
             this.jumpHurt.AutoSize = true;
             this.jumpHurt.Enabled = false;
-            this.jumpHurt.Location = new System.Drawing.Point(94, 110);
+            this.jumpHurt.Location = new System.Drawing.Point(110, 127);
             this.jumpHurt.Name = "jumpHurt";
             this.jumpHurt.Size = new System.Drawing.Size(15, 14);
             this.jumpHurt.TabIndex = 20;
@@ -1056,9 +1060,9 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(30, 139);
+            this.label14.Location = new System.Drawing.Point(35, 160);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 13);
+            this.label14.Size = new System.Drawing.Size(66, 15);
             this.label14.TabIndex = 9;
             this.label14.Text = "Don\'t Hurt:";
             this.toolTip.SetToolTip(this.label14, "If checked, then the NPC will not hurt you at all");
@@ -1066,7 +1070,7 @@
             // dontHurtCb
             // 
             this.dontHurtCb.AutoSize = true;
-            this.dontHurtCb.Location = new System.Drawing.Point(181, 140);
+            this.dontHurtCb.Location = new System.Drawing.Point(211, 162);
             this.dontHurtCb.Name = "dontHurtCb";
             this.dontHurtCb.Size = new System.Drawing.Size(15, 14);
             this.dontHurtCb.TabIndex = 8;
@@ -1077,7 +1081,7 @@
             // 
             this.dontHurt.AutoSize = true;
             this.dontHurt.Enabled = false;
-            this.dontHurt.Location = new System.Drawing.Point(94, 140);
+            this.dontHurt.Location = new System.Drawing.Point(110, 162);
             this.dontHurt.Name = "dontHurt";
             this.dontHurt.Size = new System.Drawing.Size(15, 14);
             this.dontHurt.TabIndex = 21;
@@ -1088,7 +1092,7 @@
             // 
             this.grabTop.AutoSize = true;
             this.grabTop.Enabled = false;
-            this.grabTop.Location = new System.Drawing.Point(94, 83);
+            this.grabTop.Location = new System.Drawing.Point(110, 96);
             this.grabTop.Name = "grabTop";
             this.grabTop.Size = new System.Drawing.Size(15, 14);
             this.grabTop.TabIndex = 19;
@@ -1099,7 +1103,7 @@
             // 
             this.grabSide.AutoSize = true;
             this.grabSide.Enabled = false;
-            this.grabSide.Location = new System.Drawing.Point(94, 56);
+            this.grabSide.Location = new System.Drawing.Point(110, 65);
             this.grabSide.Name = "grabSide";
             this.grabSide.Size = new System.Drawing.Size(15, 14);
             this.grabSide.TabIndex = 18;
@@ -1109,9 +1113,9 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(37, 83);
+            this.label13.Location = new System.Drawing.Point(43, 96);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 13);
+            this.label13.Size = new System.Drawing.Size(56, 15);
             this.label13.TabIndex = 4;
             this.label13.Text = "Grab top:";
             this.toolTip.SetToolTip(this.label13, "If checked, then this NPC can be picked up from the top (like SMB2 enemies)");
@@ -1119,9 +1123,9 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(30, 56);
+            this.label12.Location = new System.Drawing.Point(35, 65);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.Size = new System.Drawing.Size(59, 15);
             this.label12.TabIndex = 3;
             this.label12.Text = "Grab side:";
             this.toolTip.SetToolTip(this.label12, "If checked, then the NPC can be grabbed from the side");
@@ -1129,7 +1133,7 @@
             // scoreCb
             // 
             this.scoreCb.AutoSize = true;
-            this.scoreCb.Location = new System.Drawing.Point(181, 27);
+            this.scoreCb.Location = new System.Drawing.Point(211, 31);
             this.scoreCb.Name = "scoreCb";
             this.scoreCb.Size = new System.Drawing.Size(15, 14);
             this.scoreCb.TabIndex = 2;
@@ -1155,9 +1159,9 @@
             "1-Up",
             "2-Up",
             "5-Up"});
-            this.scoreList.Location = new System.Drawing.Point(94, 24);
+            this.scoreList.Location = new System.Drawing.Point(110, 28);
             this.scoreList.Name = "scoreList";
-            this.scoreList.Size = new System.Drawing.Size(81, 21);
+            this.scoreList.Size = new System.Drawing.Size(94, 23);
             this.scoreList.TabIndex = 17;
             this.toolTip.SetToolTip(this.scoreList, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
                     "\'t get points");
@@ -1165,9 +1169,9 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(44, 28);
+            this.label7.Location = new System.Drawing.Point(51, 32);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 13);
+            this.label7.Size = new System.Drawing.Size(42, 15);
             this.label7.TabIndex = 0;
             this.label7.Text = "Score: ";
             this.framesTip.SetToolTip(this.label7, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
@@ -1176,7 +1180,7 @@
             // grabSideCb
             // 
             this.grabSideCb.AutoSize = true;
-            this.grabSideCb.Location = new System.Drawing.Point(639, 70);
+            this.grabSideCb.Location = new System.Drawing.Point(745, 102);
             this.grabSideCb.Name = "grabSideCb";
             this.grabSideCb.Size = new System.Drawing.Size(15, 14);
             this.grabSideCb.TabIndex = 7;
@@ -1186,7 +1190,7 @@
             // grabTopCb
             // 
             this.grabTopCb.AutoSize = true;
-            this.grabTopCb.Location = new System.Drawing.Point(639, 97);
+            this.grabTopCb.Location = new System.Drawing.Point(745, 133);
             this.grabTopCb.Name = "grabTopCb";
             this.grabTopCb.Size = new System.Drawing.Size(15, 14);
             this.grabTopCb.TabIndex = 8;
@@ -1196,9 +1200,9 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.pictureBox1);
-            this.groupBox4.Location = new System.Drawing.Point(682, 12);
+            this.groupBox4.Location = new System.Drawing.Point(796, 35);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(309, 250);
+            this.groupBox4.Size = new System.Drawing.Size(360, 288);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "NPC Animation";
@@ -1208,17 +1212,17 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 16);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(303, 231);
+            this.pictureBox1.Size = new System.Drawing.Size(354, 266);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(913, 277);
+            this.button1.Location = new System.Drawing.Point(1066, 340);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(87, 27);
             this.button1.TabIndex = 10;
             this.button1.Text = "Browse...";
             this.button1.UseVisualStyleBackColor = true;
@@ -1226,9 +1230,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(766, 277);
+            this.button2.Location = new System.Drawing.Point(889, 340);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(141, 23);
+            this.button2.Size = new System.Drawing.Size(171, 27);
             this.button2.TabIndex = 11;
             this.button2.Text = "Start";
             this.button2.UseVisualStyleBackColor = true;
@@ -1245,9 +1249,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(685, 277);
+            this.button3.Location = new System.Drawing.Point(796, 340);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(87, 27);
             this.button3.TabIndex = 12;
             this.button3.Text = "Stop";
             this.button3.UseVisualStyleBackColor = true;
@@ -1303,12 +1307,36 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.ToolTipTitle = "Information";
             // 
+            // defaultNpc
+            // 
+            this.defaultNpc.AutoSize = true;
+            this.defaultNpc.Location = new System.Drawing.Point(16, 9);
+            this.defaultNpc.Name = "defaultNpc";
+            this.defaultNpc.Size = new System.Drawing.Size(64, 15);
+            this.defaultNpc.TabIndex = 13;
+            this.defaultNpc.Text = "Load a file!";
+            // 
+            // menuItem11
+            // 
+            this.menuItem11.Index = 1;
+            this.menuItem11.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem12});
+            this.menuItem11.Text = "Edit";
+            // 
+            // menuItem12
+            // 
+            this.menuItem12.Index = 0;
+            this.menuItem12.Text = "Change SMBX Directory";
+            this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
+            // 
             // Main
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 315);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1170, 388);
+            this.Controls.Add(this.defaultNpc);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -1318,6 +1346,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1463,5 +1492,8 @@
         private System.Windows.Forms.ToolTip frameStyleTip;
         private System.Windows.Forms.ToolTip foregroundTip;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.MenuItem menuItem11;
+        private System.Windows.Forms.MenuItem menuItem12;
+        private System.Windows.Forms.Label defaultNpc;
     }
 }

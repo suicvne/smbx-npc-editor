@@ -117,35 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>---1.3.0.0---
--Updated the UI to reflect the Windows 7/8 Desktop guidelines (segoe ui 9pt, white background, etc)
--Added a config file that contains every single NPC in SMBX. Now, you can find out what NPC this replaces and in the future this will have more functionality
--Changed the way reading is handled. It looks alot nicer now
-
----1.2.0.0---
--Added support for animating an NPC (thanks a bunch GhostHawk!)
--Tries to automatically find the corresponding image in the same directory as .TXT
--Can edit how fast the NPC is animated with the "Frames Speed" checkbox
-     -Uncheck the check box to not have it write
--Can manually load an NPC file if needed
--Also shows the name of the NPC's gif file if loaded
--Added tooltips to explain each of the values. Hover your mouse over the label or box/numeric box/etc to see
-
----1.1.0.0---
--Adds support for the "0" score
--Adds support for negative GFX Offset values
--Adds support for a two-decimal place speed value (1.25 instead of 1.2)
--Adds the changelog form
--Removed the dialog asking if you wanted to quit, it was annoying and didn't work right
--Added support for drag/drop the NPC Text files onto the form
-
----1.0.0.1---
--Fixed a bug where the "Don't Hurt" checkbox wouldn't become enabled
-
----1.0.0.0---
--Basic UI with 3 groupboxes and a bunch of controls for enabling/disable various NPC codes
--Supports opening, saving, save as, etc
--.NET 4.0</value>
-  </data>
 </root>

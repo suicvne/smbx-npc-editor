@@ -9,7 +9,11 @@ using System.Windows.Forms;
 using visualNPCEditor.Controls;
 using System.IO;
 using System.Diagnostics;
+using System.Windows;
 using smbxnpceditor;
+using Utility.ModifyRegistry;
+using Setting;
+using System.Reflection;
 
 namespace visualNPCEditor
 {
@@ -29,6 +33,10 @@ namespace visualNPCEditor
         public Bitmap bmp;
         public bool isTimerOn;
         bool validData;
+        public string smbxDirectory = null;
+        IniFile defaultConfig;
+        ModifyRegistry mr = new ModifyRegistry();
+
 
         public Main()
         {
@@ -49,35 +57,46 @@ namespace visualNPCEditor
             if (of.ShowDialog() == DialogResult.OK)
             {
                 readFile(of.FileName);
-                string name = Path.GetFileNameWithoutExtension(of.FileName);
-                string path = Path.GetDirectoryName(of.FileName);
-                string nameWGif = path + @"\" + name + ".gif";
+            }
+            string name = Path.GetFileNameWithoutExtension(of.FileName);
+            string path = Path.GetDirectoryName(of.FileName);
+            string nameWGif = path + @"\" + name + ".gif";
 
-                if (File.Exists(nameWGif))
+            if(File.Exists(nameWGif))
+            {
+                try
+                {
+                    showSprite(nameWGif);
+                    this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
+                    defaultNpc.Text = string.Format("This NPC replaces {0}.", defaultConfig.ReadValue("npcconfig", name));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unable to create animation: " + ex.Message);
+                    MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                if (Directory.Exists(smbxDirectory))
                 {
                     try
                     {
-                        showSprite(nameWGif);
+                        showSprite(smbxDirectory + @"\" + name + ".gif");
                         this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine("Unable to create animation: " + ex.Message);
-                        MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
-                else
-                {
-                    this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName);
-                }
-                hasSaved = true;
-                workingFile = of.FileName;
+                this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName);
+                defaultNpc.Text = string.Format("Looks like {0} replaces {1}.", name, defaultConfig.ReadValue("npcconfig", name));
             }
-            else
-            {
-                //nice try
-            }
+            //
             
+            hasSaved = true;
+            workingFile = of.FileName;
         }
         #region Events
         private void scoreCb_CheckedChanged(object sender, EventArgs e)
@@ -217,6 +236,7 @@ namespace visualNPCEditor
             workingFile = null;
             hasSaved = false;
             resetAllItems();
+            defaultNpc.Text = "Load a file or save one!";
             this.Text = "SMBX NPC Editor";
         }
         private void menuItem3_Click(object sender, EventArgs e)
@@ -373,496 +393,349 @@ namespace visualNPCEditor
         }
         #endregion
         #region Related to saving, reading, etc
-        public void readFile(string fileName)
+        public void readFile(string file)
         {
-            Console.WriteLine("Reading: " + fileName.ToString());
-                resetAllItems();
-                //List<NPC> npc = new List<NPC>();
-                using (StreamReader sr = new StreamReader(fileName.ToString()))
+            Console.WriteLine("Reading: {0}", file);
+            resetAllItems();
+            var npcfile = File.ReadAllLines(file);
+            var config = (from line in npcfile
+                          let s = line.Split('=')
+                          select new { Key = s[0], Value = s[1] })
+                .ToDictionary(x => x.Key, x => x.Value);
+            for (int index = 0; index < config.Count; index++)
+            {
+                decimal number;
+                var item = config.ElementAt(index);
+                var itemKey = item.Key;
+                var itemValue = item.Value;
+                Console.WriteLine("{0} is {1}", itemKey, itemValue);
+                switch (itemKey)
                 {
-                    //String wholeFile = sr.ReadToEnd();
-
-                    string line;
-
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        if (line.Contains("gfxoffsetx"))
+                    case("gfxoffsetx"):
+                        xOffsetCb.Checked = true;
+                        xOffset.Text = itemValue.ToString();
+                        xOffset.Enabled = true;
+                        break;
+                    case("gfxoffsety"):
+                        yOffsetCb.Checked = true;
+                        yOffset.Text = itemValue.ToString();
+                        xOffset.Enabled = true;
+                        break;
+                    case("width"):
+                        pNpcWidthCb.Checked = true;
+                        if (Decimal.TryParse(itemValue, out number))
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            xOffset.Value = Decimal.Parse(split[1].ToString());
-                            xOffset.Enabled = true;
-                            xOffsetCb.Checked = true;
+                            pNpcWidth.Value = number;
+                            pNpcWidth.Enabled = true;
                         }
-
-                        if (line.Contains("gfxoffsety"))
+                        break;
+                    case("height"):
+                        pNpcHeightCb.Checked = true;
+                        if (Decimal.TryParse(itemValue, out number))
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            yOffset.Value = Decimal.Parse(split[1].ToString());
-                            yOffset.Enabled = true;
-                            yOffsetCb.Checked = true;
+                            pNpcHeight.Enabled = true;
+                            pNpcHeight.Value = number;
                         }
-
-                        if (line.Contains("width"))
+                        break;
+                    case("gfxwidth"):
+                        npcWCb.Checked = true;
+                        if (Decimal.TryParse(itemValue, out number))
                         {
-                                if (line.Contains("gfx"))
-                                {
-                                    var split = line.Split(new char[] { '=' }, 2);
-                                    //var val = int.Parse(split.ToString());
-                                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                    npcWidth.Value = Decimal.Parse(split[1].ToString());
-                                    npcWidth.Enabled = true;
-                                    npcWCb.Checked = true;
-                                }
-                                else
-                                {
-                                    var split = line.Split(new char[] { '=' }, 2);
-                                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                    pNpcWidth.Value = Decimal.Parse(split[1].ToString());
-                                    pNpcWidth.Enabled = true;
-                                    pNpcWidthCb.Checked = true;
-                                }
+                            npcWidth.Enabled = true;
+                            npcWidth.Value = number;
                         }
-
-                        if (line.Contains("height"))
+                        break;
+                    case("gfxheight"):
+                        npcHCb.Checked = true;
+                        if (Decimal.TryParse(itemValue, out number))
                         {
-                               
-                                if (line.Contains("gfx"))
-                                {
-                                    var split = line.Split(new char[] { '=' }, 2);
-                                    //var val = int.Parse(split.ToString());
-                                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                    npcHeight.Value = Decimal.Parse(split[1].ToString());
-                                    npcHeight.Enabled = true;
-                                    npcHCb.Checked = true;
-                                }
-                                else
-                                {
-                                    var split = line.Split(new char[] { '=' }, 2);
-                                    Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                    pNpcHeight.Value = Decimal.Parse(split[1].ToString());
-                                    pNpcHeight.Enabled = true;
-                                    pNpcHeightCb.Checked = true;
-                                }
+                            npcHeight.Enabled = true;
+                            npcHeight.Value = number;
                         }
-                        
-                        if (line.Contains("score"))
+                        break;
+                    case("score"):
+                        scoreCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var score = split[1].ToString();
-                            scoreList.Enabled = true;
-                            scoreCb.Checked = true;
-                            switch (score)
-                            {
-                                case "0":
-                                    scoreList.Text = "None";
-                                    break;
-                                case "1":
-                                    //10
-                                    scoreList.Text = "10";
-                                    break;
-                                case "2":
-                                    //100
-                                    scoreList.Text = "100";
-                                    break;
-                                case "3":
-                                    //200
-                                    scoreList.Text = "200";
-                                    break;
-                                case "4":
-                                    //400
-                                    scoreList.Text = "400";
-                                    break;
-                                case "5":
-                                    //800
-                                    scoreList.Text = "800";
-                                    break;
-                                case "6":
-                                    //1000
-                                    scoreList.Text = "1000";
-                                    break;
-                                case "7":
-                                    //2000
-                                    scoreList.Text = "2000";
-                                    break;
-                                case "8":
-                                    //4000
-                                    scoreList.Text = "4000";
-                                    break;
-                                case "9":
-                                    //8000
-                                    scoreList.Text = "8000";
-                                    break;
-                                case "10":
-                                    //1up
-                                    scoreList.Text = "1-Up";
-                                    break;
-                                case "11":
-                                    //2up
-                                    scoreList.Text = "2-Up";
-                                    break;
-                                case "12":
-                                    //5up
-                                    scoreList.Text = "5-Up";
-                                    break;
-                            }
+                            case("0"):
+                                scoreList.Text = "None";
+                                break;
+                            case ("1"):
+                                scoreList.Text = "10";
+                                break;
+                            case ("2"):
+                                scoreList.Text = "100";
+                                break;
+                            case ("3"):
+                                scoreList.Text = "200";
+                                break;
+                            case ("4"):
+                                scoreList.Text = "400";
+                                break;
+                            case ("5"):
+                                scoreList.Text = "800";
+                                break;
+                            case ("6"):
+                                scoreList.Text = "1000";
+                                break;
+                            case ("7"):
+                                scoreList.Text = "2000";
+                                break;
+                            case ("8"):
+                                scoreList.Text = "4000";
+                                break;
+                            case ("9"):
+                                scoreList.Text = "8000";
+                                break;
+                            case ("10"):
+                                scoreList.Text = "1-Up";
+                                break;
+                            case ("11"):
+                                scoreList.Text = "2-Up";
+                                break;
+                            case ("12"):
+                                scoreList.Text = "5-Up";
+                                break;
                         }
-
-                        if (line.Contains("playerblock"))
+                        scoreList.Enabled = true;
+                        break;
+                    case("playerblock"):
+                        pCollisionCb.Checked = true;
+                        switch (itemValue)
                         {
-                            if (line.Contains("top"))
-                            {
-                                var split = line.Split(new char[] { '=' }, 2);
-                                //var val = int.Parse(split.ToString());
-                                Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                var tf = split[1].ToString();
-                                switch (tf)
-                                {
-                                    case("1"):
-                                        pCollisionTop.Checked = true;
-                                        break;
-                                    case("0"):
-                                        pCollisionTop.Checked = false;
-                                        break;
-                                }
-                                pCollisionTop.Enabled = true;
-                                pCollisionTopCb.Checked = true;
-                            }
-                            else
-                            {
-                                var split = line.Split(new char[] { '=' }, 2);
-                                //var val = int.Parse(split.ToString());
-                                Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                var tf = split[1].ToString();
-                                switch (tf)
-                                {
-                                    case ("1"):
-                                        pCollision.Checked = true;
-                                        break;
-                                    case ("0"):
-                                        pCollision.Checked = false;
-                                        break;
-                                }
-                                pCollision.Enabled = true;
-                                pCollisionCb.Checked = true;
-                            }
+                            case("0"):
+                                pCollision.Checked = false;
+                                break;
+                            case("1"):
+                                pCollision.Checked = true;
+                                break;
                         }
-                        
-                        if (line.Contains("npcblock"))
+                        pCollision.Enabled = true;
+                        break;
+                    case("playerblocktop"):
+                        pCollisionTopCb.Checked = true;
+                        switch (itemValue)
                         {
-                            if (line.Contains("top"))
-                            {
-                                var split = line.Split(new char[] { '=' }, 2);
-                                //var val = int.Parse(split.ToString());
-                                Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                var tf = split[1].ToString();
-                                switch (tf)
-                                {
-                                    case ("1"):
-                                        npcCollisionTop.Checked = true;
-                                        break;
-                                    case ("0"):
-                                        npcCollisionTop.Checked = false;
-                                        break;
-                                }
-                                npcCollisionTop.Enabled = true;
-                                npcCollisionTopCb.Checked = true;
-                            }
-                            else
-                            {
-                                var split = line.Split(new char[] { '=' }, 2);
-                                //var val = int.Parse(split.ToString());
-                                Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                var tf = split[1].ToString();
-                                switch (tf)
-                                {
-                                    case ("1"):
-                                        npcCollision.Checked = true;
-                                        break;
-                                    case ("0"):
-                                        npcCollision.Checked = false;
-                                        break;
-                                }
-                                npcCollision.Enabled = true;
-                                npcCollisionCb.Checked = true;
-                            }
+                            case("0"):
+                                pCollisionTop.Checked = false;
+                                break;
+                            case("1"):
+                                pCollisionTop.Checked = true;
+                                break;
                         }
-                        
-                        if (line.Contains("grabside"))
+                        pCollisionTop.Enabled = true;
+                        break;
+                    case("npcblock"):
+                        npcCollisionCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case("1"):
-                                    grabSide.Checked = true;
-                                    break;
-                                case("0"):
-                                    grabSide.Checked = false;
-                                    break;
-                            }
-                            grabSide.Enabled = true;
-                            grabSideCb.Checked = true;
+                            case("0"):
+                                npcCollision.Checked = false;
+                                break;
+                            case("1"):
+                                npcCollision.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("grabtop"))
+                        npcCollision.Enabled = true;
+                        break;
+                    case("npcblocktop"):
+                        npcCollisionTopCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    grabTop.Checked = true;
-                                    break;
-                                case ("0"):
-                                    grabTop.Checked = false;
-                                    break;
-                            }
-                            grabTop.Enabled = true;
-                            grabTopCb.Checked = true;
+                            case("0"):
+                                npcCollisionTop.Checked = false;
+                                break;
+                            case("1"):
+                                npcCollisionTop.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("jumphurt"))
+                        npcCollisionTop.Enabled = true;
+                        break;
+                    case("grabside"):
+                        grabSideCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case("1"):
-                                    jumpHurt.Checked = true;
-                                    break;
-                                case("0"):
-                                    jumpHurt.Checked = false;
-                                    break;
-                            }
-                            jumpHurt.Enabled = true;
-                            jumpHurtCb.Checked = true;
+                            case("0"):
+                                grabSide.Checked = false;
+                                break;
+                            case("1"):
+                                grabSide.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("nohurt"))
+                        grabSide.Enabled = true;
+                        break;
+                    case("grabtop"):
+                        grabTopCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    dontHurt.Checked = true;
-                                    break;
-                                case ("0"):
-                                    dontHurt.Checked = false;
-                                    break;
-                            }
-                            dontHurt.Enabled = true;
-                            dontHurtCb.Checked = true;
+                            case("0"):
+                                grabTop.Checked = false;
+                                break;
+                            case("1"):
+                                grabTop.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("noblockcollision"))
+                        grabTop.Enabled = true;
+                        break;
+                    case("jumphurt"):
+                        jumpHurtCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case("1"):
-                                    noBlockCollision.Checked = true;
-                                    break;
-                                case("0"):
-                                    noBlockCollision.Checked = true;
-                                    break;
-                            }
-                            noBlockCollision.Enabled = true;
-                            noBlockCb.Checked = true;
+                            case("0"):
+                                jumpHurt.Checked = false;
+                                break;
+                            case("1"):
+                                jumpHurt.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("cliffturn"))
+                        jumpHurt.Enabled = true;
+                        break;
+                    case("nohurt"):
+                        dontHurtCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    cliffTurn.Checked = true;
-                                    break;
-                                case ("0"):
-                                    cliffTurn.Checked = true;
-                                    break;
-                            }
-                            cliffTurn.Enabled = true;
-                            cliffTurnCb.Checked = true;
+                            case("0"):
+                                dontHurt.Checked = false;
+                                break;
+                            case("1"):
+                                dontHurt.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("noyoshi"))
+                        dontHurt.Enabled = true;
+                        break;
+                    case("noblockcollision"):
+                        noBlockCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    noYoshi.Checked = true;
-                                    break;
-                                case ("0"):
-                                    noYoshi.Checked = true;
-                                    break;
-                            }
-                            noYoshi.Enabled = true;
-                            noYoshiCb.Checked = true;
+                            case("0"):
+                                noBlockCollision.Checked = false;
+                                break;
+                            case("1"):
+                                noBlockCollision.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("foreground"))
+                        noBlockCollision.Enabled = true;
+                        break;
+                    case("cliffturn"):
+                        cliffTurnCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    foreground.Checked = true;
-                                    break;
-                                case ("0"):
-                                    foreground.Checked = true;
-                                    break;
-                            }
-                            foreground.Enabled = true;
-                            foregroundCb.Checked = true;
+                            case("0"):
+                                cliffTurn.Checked = false;
+                                break;
+                            case("1"):
+                                cliffTurn.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("speed"))
+                        cliffTurn.Enabled = true;
+                        break;
+                    case("noyoshi"):
+                        noYoshiCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            speed.Value = Decimal.Parse(split[1].ToString());
-                            speed.Enabled = true;
-                            speedCb.Checked = true;
+                            case("0"):
+                                noYoshi.Checked = false;
+                                break;
+                            case("1"):
+                                noYoshi.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("nofireball"))
+                        noYoshiCb.Enabled = true;
+                        break;
+                    case("foreground"):
+                        foregroundCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    noFireball.Checked = true;
-                                    break;
-                                case ("0"):
-                                    noFireball.Checked = true;
-                                    break;
-                            }
-                            noFireball.Enabled = true;
-                            noFireballCb.Checked = true;
+                            case("0"):
+                                foreground.Checked = false;
+                                break;
+                            case("1"):
+                                foreground.Checked = true;
+                                break;
                         }
-
-                        if (line.Contains("nogravity"))
+                        foreground.Enabled = true;
+                        break;
+                    case("speed"):
+                        speedCb.Checked = true;
+                        speed.Enabled = true;
+                        if (Decimal.TryParse(itemValue, out number))
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    noGravity.Checked = true;
-                                    break;
-                                case ("0"):
-                                    noGravity.Checked = true;
-                                    break;
-                            }
-                            noGravity.Enabled = true;
-                            noGravityCb.Checked = true;
+                            speed.Value = number;
                         }
-
-                        if (line.Contains("frames"))
+                        break;
+                    case("nofireball"):
+                        noFireballCb.Checked = true;
+                        switch (itemValue)
                         {
-                            if (line.Contains("speed"))
-                            {
-                                var split = line.Split(new char[] { '=' }, 2);
-                                //var val = int.Parse(split.ToString());
-                                Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                frameSpeed.Value = Decimal.Parse(split[1].ToString());
-                                frameSpeed.Enabled = true;
-                                frameSpeedCb.Checked = true;
-                            }
-                            else if (line.Contains("style"))
-                            {
-                                var split = line.Split(new char[] { '=' }, 2);
-                                //var val = int.Parse(split.ToString());
-                                Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                var tf = split[1].ToString();
-                                switch (tf)
-                                {
-                                    case("2"):
-                                        frameStyle.Text = "Left/Right/Upside Down Sprites";
-                                        break;
-                                    case ("1"):
-                                        frameStyle.Text = "Left/Right Sprites";
-                                        break;
-                                    case ("0"):
-                                        frameStyle.Text = "Single Sprite";
-                                        break;
-                                }
-                                frameStyle.Enabled = true;
-                                frameStyleCb.Checked = true;
-                            }
-                            else
-                            {
-                                var split = line.Split(new char[] { '=' }, 2);
-                                //var val = int.Parse(split.ToString());
-                                Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                                frames.Value = Decimal.Parse(split[1].ToString());
-                                frames.Enabled = true;
-                                framesCb.Checked = true;
-                            }
+                            case("0"):
+                                noFireball.Checked = false;
+                                break;
+                            case("1"):
+                                noFireball.Checked = true;
+                                break;
                         }
-                        
-                        if (line.Contains("noiceball"))
+                        noFireball.Enabled = true;
+                        break;
+                    case("nogravity"):
+                        noGravityCb.Checked = true;
+                        switch (itemValue)
                         {
-                            var split = line.Split(new char[] { '=' }, 2);
-                            //var val = int.Parse(split.ToString());
-                            Console.WriteLine(split[0].ToString() + " is equal to " + split[1].ToString());
-                            var tf = split[1].ToString();
-                            switch (tf)
-                            {
-                                case ("1"):
-                                    noFreeze.Checked = true;
-                                    break;
-                                case ("0"):
-                                    noFreeze.Checked = true;
-                                    break;
-                            }
-                            noFreeze.Enabled = true;
-                            noFreezeCb.Checked = true;
+                            case("0"):
+                                noGravity.Checked = false;
+                                break;
+                            case("1"):
+                                noGravity.Checked = true;
+                                break;
                         }
-                        //end fucntion
-                    }
-                    //end while
+                        noGravity.Enabled = true;
+                        break;
+                    case("frames"):
+                        framesCb.Checked = true;
+                        frames.Enabled = true;
+                        if (Decimal.TryParse(itemValue, out number))
+                        {
+                            frames.Value = number;
+                        }
+                        break;
+                    case("framespeed"):
+                        frameSpeedCb.Checked = true;
+                        frameSpeed.Enabled = true;
+                        if (Decimal.TryParse(itemValue, out number))
+                        {
+                            frameSpeed.Value = number;
+                        }
+                        break;
+                    case("framestyle"):
+                        frameStyleCb.Checked = true;
+                        switch (itemValue)
+                        {
+                            case ("2"):
+                                frameStyle.Text = "Left/Right/Upside Down Sprites";
+                                break;
+                            case ("1"):
+                                frameStyle.Text = "Left/Right Sprites";
+                                break;
+                            case ("0"):
+                                frameStyle.Text = "Single Sprite";
+                                break;
+                        }
+                        frameStyle.Enabled = true;
+                        break;
+                    case("noiceball"):
+                        noFreezeCb.Checked = true;
+                        switch (itemValue)
+                        {
+                            case("0"):
+                                noFreeze.Checked = false;
+                                break;
+                            case("1"):
+                                noFreeze.Checked = true;
+                                break;
+                        }
+                        noFreeze.Enabled = true;
+                        break;
                 }
-                //end using
-            //
-            hasSaved = true;
-            workingFile = fileName;
-            this.Text = "SMBX NPC Editor - " + Path.GetFileName(fileName);
+            }
         }
         public void resetAllItems()
         {
@@ -1256,13 +1129,67 @@ namespace visualNPCEditor
             this.Text = "SMBX NPC Editor - " + Path.GetFileName(workingFile);
         }
         #endregion
+
         #region Animation stuff, kindly coded by GhostHawk. Can't thank him enough!
         private void Main_Load(object sender, EventArgs e)
         {
+              
+            using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("smbxnpceditor.Resources.SMBX64.ini"))   
+            {
+                using (var file = new FileStream(Environment.CurrentDirectory + @"\npc-config.ini", FileMode.Create, FileAccess.Write))   
+                {
+                    resource.CopyTo(file);
+                }
+            }
+            defaultConfig = new IniFile(Environment.CurrentDirectory + @"\npc-config.ini");
+             
             openFileDialog1.Title = "Open NPC Image";
             openFileDialog1.Filter = "SMBX Sprite Files (*.gif)|*gif";
-        }
 
+        TryReadRegistry:
+            try
+            {
+                var reg = mr.Read("SMBXDIRECTORY");
+                smbxDirectory = reg.ToString();
+                goto CheckDirectory;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
+                goto BeginProgram;
+            }
+        CheckDirectory:
+            if (smbxDirectory != null)
+            {
+                if (Directory.Exists(smbxDirectory) != false)
+                {
+                    //we all good!
+                }
+            }
+            else
+            {
+                MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
+            }
+        BeginProgram:
+            Console.WriteLine("Loaded Configuration: SMBX64 Successfully");
+        }
+        private static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
+        {
+            foreach (string file in files)
+            {
+                using (System.IO.Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceLocation + @"." + file))
+                {
+                    using (System.IO.FileStream fileStream = new System.IO.FileStream(System.IO.Path.Combine(outputDir, file), System.IO.FileMode.Create))
+                    {
+                        for (int i = 0; i < stream.Length; i++)
+                        {
+                            fileStream.WriteByte((byte)stream.ReadByte());
+                        }
+                        fileStream.Close();
+                    }
+                }
+            }
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             CurFrame += 1;
@@ -1345,7 +1272,7 @@ namespace visualNPCEditor
                 else
                 {
                     framesSpeed = Convert.ToInt32(1);
-                    frameSpeed.Value = 8;
+                    frameSpeed.Value = 1;
                 }
                 bmp = new Bitmap(gfxWidth, gfxHeight);   
                 int caseSwitch = framesSpeed;
@@ -1420,6 +1347,12 @@ namespace visualNPCEditor
         private void groupBox3_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void menuItem12_Click(object sender, EventArgs e)
+        {
+            EditSMBXDir es = new EditSMBXDir();
+            es.ShowDialog();
         }
     }
 }
