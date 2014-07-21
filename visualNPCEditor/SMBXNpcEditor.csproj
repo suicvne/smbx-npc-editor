@@ -57,6 +57,9 @@
     <Compile Include="Changelog.Designer.cs">
       <DependentUpon>Changelog.cs</DependentUpon>
     </Compile>
+    <Compile Include="CueTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EditSMBXDir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +78,9 @@
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WatermarkTextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <None Include="app.config" />
     <None Include="Fody.targets" />

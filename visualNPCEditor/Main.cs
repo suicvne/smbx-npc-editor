@@ -14,6 +14,7 @@ using smbxnpceditor;
 using Utility.ModifyRegistry;
 using Setting;
 using System.Reflection;
+using System.Drawing.Imaging;
 
 namespace visualNPCEditor
 {
@@ -24,6 +25,7 @@ namespace visualNPCEditor
         public string imagePath;
         public FileStream fs;
         public Image animatedImage;
+        public Image fromFile;
         public int totalFrames;
         public int CurFrame;
         public int gfxWidth;
@@ -34,6 +36,7 @@ namespace visualNPCEditor
         public bool isTimerOn;
         bool validData;
         public string smbxDirectory = null;
+        public bool showAnimationPane = true;
         IniFile defaultConfig;
         ModifyRegistry mr = new ModifyRegistry();
 
@@ -57,46 +60,65 @@ namespace visualNPCEditor
             if (of.ShowDialog() == DialogResult.OK)
             {
                 readFile(of.FileName);
-            }
-            string name = Path.GetFileNameWithoutExtension(of.FileName);
-            string path = Path.GetDirectoryName(of.FileName);
-            string nameWGif = path + @"\" + name + ".gif";
+                string name = Path.GetFileNameWithoutExtension(of.FileName);
+                string path = Path.GetDirectoryName(of.FileName);
+                string nameWGif = path + @"\" + name + ".gif";
 
-            if(File.Exists(nameWGif))
-            {
-                try
-                {
-                    showSprite(nameWGif);
-                    this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
-                    defaultNpc.Text = string.Format("This NPC replaces {0}.", defaultConfig.ReadValue("npcconfig", name));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Unable to create animation: " + ex.Message);
-                    MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
-            else
-            {
-                if (Directory.Exists(smbxDirectory))
+                if (File.Exists(nameWGif))
                 {
                     try
                     {
-                        showSprite(smbxDirectory + @"\" + name + ".gif");
+                        showSprite(nameWGif);
                         this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine("Unable to create animation: " + ex.Message);
+                        MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    try
+                    {
+                        defaultNpc.Text = string.Format("Looks like {0} replaces {1}.", name, defaultConfig.ReadValue("npcconfig", name));
+                        npcNameTextBox.CueText = string.Format("Suggested name: {0}", defaultConfig.ReadValue("npcconfig", name));
+                    }
+                    catch (Exception ex)
+                    {
+                        defaultNpc.Text = "Couldn't obtain the default configs!";
+                        Console.WriteLine("Couldn't obtain the default configs!\nTrace: {0}", ex.Message);
                     }
                 }
-                this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName);
-                defaultNpc.Text = string.Format("Looks like {0} replaces {1}.", name, defaultConfig.ReadValue("npcconfig", name));
+                else
+                {
+                    if (Directory.Exists(smbxDirectory))
+                    {
+                        try
+                        {
+                            showSprite(smbxDirectory + @"\" + name + ".gif");
+                            this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Unable to create animation: " + ex.Message);
+                        }
+                    }
+                    this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName);
+                    try
+                    {
+                        defaultNpc.Text = string.Format("Looks like {0} replaces {1}.", name, defaultConfig.ReadValue("npcconfig", name));
+                        npcNameTextBox.CueText = string.Format("Suggested name: {0}", defaultConfig.ReadValue("npcconfig", name));
+                    }
+                    catch (Exception ex)
+                    {
+                        defaultNpc.Text = "Couldn't obtain the default configs!";
+                        Console.WriteLine("Couldn't obtain the default configs!\nTrace: {0}", ex.Message);
+                    }
+                }
+                //
+                label26.Focus();
+                hasSaved = true;
+                workingFile = of.FileName;
             }
-            //
             
-            hasSaved = true;
-            workingFile = of.FileName;
         }
         #region Events
         private void scoreCb_CheckedChanged(object sender, EventArgs e)
@@ -311,6 +333,16 @@ namespace visualNPCEditor
                 if (MessageBox.Show("Are you sure you want to quit?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     e.Cancel = false;
+                    try
+                    {
+                        File.Delete(Environment.CurrentDirectory + @"\npc-config.ini");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        StreamWriter sw = new StreamWriter(Environment.CurrentDirectory + @"\error.txt");
+                        sw.WriteLine("Hey man! there was an error when trying to delete the npc-config. \nYou can leave it there if you like\nDetails:{0}", ex.Message);
+                    }
                     Application.Exit();
 
                 }
@@ -411,6 +443,11 @@ namespace visualNPCEditor
                 Console.WriteLine("{0} is {1}", itemKey, itemValue);
                 switch (itemKey)
                 {
+                    case("name"):
+                        string quotes = itemValue.ToString();
+                        string withOut = quotes.Replace("\"", "");
+                        npcNameTextBox.Text = withOut;
+                        break;
                     case("gfxoffsetx"):
                         xOffsetCb.Checked = true;
                         xOffset.Text = itemValue.ToString();
@@ -739,6 +776,7 @@ namespace visualNPCEditor
         }
         public void resetAllItems()
         {
+            npcNameTextBox.Text = "";
             npcHeight.Enabled = false;
             npcWidth.Enabled = false;
             xOffset.Enabled = false;
@@ -814,6 +852,10 @@ namespace visualNPCEditor
         {
             StreamWriter sr = new StreamWriter(fileName);
             //Graphics Related
+            if (!string.IsNullOrWhiteSpace(npcNameTextBox.Text) && npcNameTextBox.Text.Length > 0)
+            {
+                sr.WriteLine("name=" + "\"{0}\"", npcNameTextBox.Text);
+            }
             if (npcHCb.Checked == true)
             {
                 if (npcHeight.Value != 0)
@@ -1129,67 +1171,7 @@ namespace visualNPCEditor
             this.Text = "SMBX NPC Editor - " + Path.GetFileName(workingFile);
         }
         #endregion
-
         #region Animation stuff, kindly coded by GhostHawk. Can't thank him enough!
-        private void Main_Load(object sender, EventArgs e)
-        {
-              
-            using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("smbxnpceditor.Resources.SMBX64.ini"))   
-            {
-                using (var file = new FileStream(Environment.CurrentDirectory + @"\npc-config.ini", FileMode.Create, FileAccess.Write))   
-                {
-                    resource.CopyTo(file);
-                }
-            }
-            defaultConfig = new IniFile(Environment.CurrentDirectory + @"\npc-config.ini");
-             
-            openFileDialog1.Title = "Open NPC Image";
-            openFileDialog1.Filter = "SMBX Sprite Files (*.gif)|*gif";
-
-        TryReadRegistry:
-            try
-            {
-                var reg = mr.Read("SMBXDIRECTORY");
-                smbxDirectory = reg.ToString();
-                goto CheckDirectory;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
-                goto BeginProgram;
-            }
-        CheckDirectory:
-            if (smbxDirectory != null)
-            {
-                if (Directory.Exists(smbxDirectory) != false)
-                {
-                    //we all good!
-                }
-            }
-            else
-            {
-                MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
-            }
-        BeginProgram:
-            Console.WriteLine("Loaded Configuration: SMBX64 Successfully");
-        }
-        private static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
-        {
-            foreach (string file in files)
-            {
-                using (System.IO.Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceLocation + @"." + file))
-                {
-                    using (System.IO.FileStream fileStream = new System.IO.FileStream(System.IO.Path.Combine(outputDir, file), System.IO.FileMode.Create))
-                    {
-                        for (int i = 0; i < stream.Length; i++)
-                        {
-                            fileStream.WriteByte((byte)stream.ReadByte());
-                        }
-                        fileStream.Close();
-                    }
-                }
-            }
-        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             CurFrame += 1;
@@ -1217,22 +1199,11 @@ namespace visualNPCEditor
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             showSprite(openFileDialog1.FileName);
-
-            /*imagePath = openFileDialog1.FileName;
-            fs = new FileStream(imagePath, System.IO.FileMode.Open);
-            animatedImage = Image.FromStream(fs);
-
-            pictureBox1.Image = animatedImage;
-
-            if (pictureBox1.Image.Width < pictureBox1.Width)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            }*/
         }
 
         public void showSprite(string fileName)
         {
-            imagePath = fileName;
+            imagePath = openFileDialog1.FileName;
             fs = new FileStream(imagePath, System.IO.FileMode.Open);
             animatedImage = Image.FromStream(fs);
 
@@ -1242,9 +1213,10 @@ namespace visualNPCEditor
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             }
+            animateSprite();
         }
-        
-        private void button2_Click(object sender, EventArgs e)
+
+        public void animateSprite()
         {
             try
             {
@@ -1271,10 +1243,10 @@ namespace visualNPCEditor
                 }
                 else
                 {
-                    framesSpeed = Convert.ToInt32(1);
-                    frameSpeed.Value = 1;
+                    framesSpeed = Convert.ToInt32(8);
+                    frameSpeed.Value = 8;
                 }
-                bmp = new Bitmap(gfxWidth, gfxHeight);   
+                bmp = new Bitmap(gfxWidth, gfxHeight);
                 int caseSwitch = framesSpeed;
                 switch (caseSwitch)
                 {
@@ -1329,13 +1301,18 @@ namespace visualNPCEditor
                 }
                 timer1.Start();
             }
-                
+
             catch
             {
                 timer1.Stop();
                 //Exception ex;
-                
+
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1344,15 +1321,119 @@ namespace visualNPCEditor
         }
         #endregion
 
-        private void groupBox3_Enter(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
+            using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("smbxnpceditor.Resources.SMBX64.ini"))
+            {
+                using (var file = new FileStream(Environment.CurrentDirectory + @"\npc-config.ini", FileMode.Create, FileAccess.Write))
+                {
+                    resource.CopyTo(file);
+                }
+            }
+            defaultConfig = new IniFile(Environment.CurrentDirectory + @"\npc-config.ini");
 
+            openFileDialog1.Title = "Open NPC Image";
+            openFileDialog1.Filter = "SMBX Sprite Files (*.gif)|*gif";
+            TryReadRegistry:
+            try
+            {
+                var reg = mr.Read("SMBXDIRECTORY");
+                smbxDirectory = reg.ToString();
+                var enableAnimation = mr.Read("SHOWANIMATION");
+                //799, 434
+                switch (enableAnimation)
+                {
+                    case ("true"):
+                        showAnimationPane = true;
+                        animationPaneMenuItem.Checked = true;
+                        //npcAnimationGroup.Visible = true;
+                        this.Size = new System.Drawing.Size(1176, 427);
+                        break;
+                    case ("false"):
+                        showAnimationPane = false;
+                        animationPaneMenuItem.Checked = false;
+                        //npcAnimationGroup.Visible = true;
+                        this.Size = new System.Drawing.Size(799, 427);
+                        break;
+                }
+                goto CheckDirectory;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
+                goto BeginProgram;
+            }
+            CheckDirectory:
+                if (smbxDirectory != null)
+                {
+                    if (Directory.Exists(smbxDirectory) != false)
+                    {
+                        //we all good!
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
+                }
+            BeginProgram:
+                Console.WriteLine("Loaded Configuration: SMBX64 Successfully");
+        }
+        private static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
+        {
+            foreach (string file in files)
+            {
+                using (System.IO.Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceLocation + @"." + file))
+                {
+                    using (System.IO.FileStream fileStream = new System.IO.FileStream(System.IO.Path.Combine(outputDir, file), System.IO.FileMode.Create))
+                    {
+                        for (int i = 0; i < stream.Length; i++)
+                        {
+                            fileStream.WriteByte((byte)stream.ReadByte());
+                        }
+                        fileStream.Close();
+                    }
+                }
+            }
         }
 
         private void menuItem12_Click(object sender, EventArgs e)
         {
             EditSMBXDir es = new EditSMBXDir();
             es.ShowDialog();
+        }
+
+        private void animationPaneMenuItem_Click(object sender, EventArgs e)
+        {
+            switch (animationPaneMenuItem.Checked)
+            {
+                case (true):
+                    showAnimationPane = false;
+                    animationPaneMenuItem.Checked = false;
+                    try
+                    {
+                        mr.Write("SHOWANIMATION", "false");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    this.Size = new System.Drawing.Size(799, 427);
+
+                    break;
+                case (false):
+                    showAnimationPane = true;
+                    animationPaneMenuItem.Checked = true;
+                    try
+                    {
+                        mr.Write("SHOWANIMATION", "true");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    this.Size = new System.Drawing.Size(1176, 427);
+                    break;
+            }
         }
     }
 }

@@ -24,12 +24,26 @@ namespace visualNPCEditor
                     ShowConsoleWindow();
                 }
             }
+
+            if (IsLinux)
+            {
+                MessageBox.Show("Warning, you are running this under Linux so you will not be able to take advantage of the NPC-Config things I've implemented");
+            }
             Application.SetCompatibleTextRenderingDefault(false);
             Application.EnableVisualStyles();
 
             Main main = new Main();
             main.Show();
             Application.Run();
+        }
+
+        public static bool IsLinux
+        {
+            get
+            {
+                int p = (int)Environment.OSVersion.Platform;
+                return (p == 4) || (p == 6) || (p == 128);
+            }
         }
 
         public static void ShowConsoleWindow()

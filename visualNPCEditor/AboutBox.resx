@@ -119,13 +119,15 @@
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>A nice visual editor for making custom NPC's
-
+Licensed under the WTFPL. Details: http://www.wtfpl.net/about/
 ---Credits---
 Main Code (UI, NPC Reading): Luigifan2010 aka Mike Santiago
 Animation Code: GhostHawk of the SMBX Forums
 Idea/Suggestions: Wohlstand
+CueTextBox: Adam Lerch
 
 
-	Visit the official SMBX Forums thread: http://www.supermariobrosx.org//forums/viewtopic.php?f=69&amp;t=1842&amp;p=15654#p15571</value>
+	Visit the official SMBX Forums thread: http://www.supermariobrosx.org//forums/viewtopic.php?f=69&amp;t=1842&amp;p=15654#p15571
+                Knux's Forum Topic: http://knuckles96.prophpbb.com/topic16181.html</value>
   </data>
 </root>

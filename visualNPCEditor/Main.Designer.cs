@@ -62,6 +62,8 @@
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem11 = new System.Windows.Forms.MenuItem();
+            this.menuItem12 = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
@@ -122,7 +124,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.grabSideCb = new System.Windows.Forms.CheckBox();
             this.grabTopCb = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.npcAnimationGroup = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -140,8 +142,9 @@
             this.foregroundTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.defaultNpc = new System.Windows.Forms.Label();
-            this.menuItem11 = new System.Windows.Forms.MenuItem();
-            this.menuItem12 = new System.Windows.Forms.MenuItem();
+            this.label26 = new System.Windows.Forms.Label();
+            this.animationPaneMenuItem = new System.Windows.Forms.MenuItem();
+            this.npcNameTextBox = new Lerch.Samples.CueTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frames)).BeginInit();
@@ -154,7 +157,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pNpcWidth)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.npcAnimationGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -507,6 +510,20 @@
             this.menuItem5.Index = 4;
             this.menuItem5.Text = "Exit";
             this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
+            // 
+            // menuItem11
+            // 
+            this.menuItem11.Index = 1;
+            this.menuItem11.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem12,
+            this.animationPaneMenuItem});
+            this.menuItem11.Text = "Edit";
+            // 
+            // menuItem12
+            // 
+            this.menuItem12.Index = 0;
+            this.menuItem12.Text = "Change SMBX Directory";
+            this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
             // 
             // menuItem6
             // 
@@ -889,7 +906,6 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // noFreezeCb
             // 
@@ -941,7 +957,7 @@
             this.noFireball.Size = new System.Drawing.Size(15, 14);
             this.noFireball.TabIndex = 24;
             this.toolTip.SetToolTip(this.noFireball, "If checked, then the NPC can\'t be killed by fireballs\r\n\r\nNOTE: Most SMB2 enemies " +
-                    "can be killed by fireballs\r\nif this value is left unchecked.");
+        "can be killed by fireballs\r\nif this value is left unchecked.");
             this.noFireball.UseVisualStyleBackColor = true;
             // 
             // label21
@@ -953,7 +969,7 @@
             this.label21.TabIndex = 37;
             this.label21.Text = "No fireball:";
             this.toolTip.SetToolTip(this.label21, "If checked, then the NPC can\'t be killed by fireballs\r\n\r\nNOTE: Most SMB2 enemies " +
-                    "can be killed by fireballs\r\nif this value is left unchecked.");
+        "can be killed by fireballs\r\nif this value is left unchecked.");
             // 
             // speedCb
             // 
@@ -1164,7 +1180,7 @@
             this.scoreList.Size = new System.Drawing.Size(94, 23);
             this.scoreList.TabIndex = 17;
             this.toolTip.SetToolTip(this.scoreList, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
-                    "\'t get points");
+        "\'t get points");
             // 
             // label7
             // 
@@ -1175,7 +1191,7 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Score: ";
             this.framesTip.SetToolTip(this.label7, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
-                    "\'t get points");
+        "\'t get points");
             // 
             // grabSideCb
             // 
@@ -1197,16 +1213,16 @@
             this.grabTopCb.UseVisualStyleBackColor = true;
             this.grabTopCb.CheckedChanged += new System.EventHandler(this.grabTopCb_CheckedChanged);
             // 
-            // groupBox4
+            // npcAnimationGroup
             // 
-            this.groupBox4.Controls.Add(this.pictureBox1);
-            this.groupBox4.Location = new System.Drawing.Point(796, 35);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(360, 288);
-            this.groupBox4.TabIndex = 9;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "NPC Animation";
-            this.npcAniTip.SetToolTip(this.groupBox4, "NPC Animation Code made by GhostHawk");
+            this.npcAnimationGroup.Controls.Add(this.pictureBox1);
+            this.npcAnimationGroup.Location = new System.Drawing.Point(796, 35);
+            this.npcAnimationGroup.Name = "npcAnimationGroup";
+            this.npcAnimationGroup.Size = new System.Drawing.Size(360, 299);
+            this.npcAnimationGroup.TabIndex = 9;
+            this.npcAnimationGroup.TabStop = false;
+            this.npcAnimationGroup.Text = "NPC Animation";
+            this.npcAniTip.SetToolTip(this.npcAnimationGroup, "NPC Animation Code made by GhostHawk");
             // 
             // pictureBox1
             // 
@@ -1214,7 +1230,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(354, 266);
+            this.pictureBox1.Size = new System.Drawing.Size(354, 277);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -1316,18 +1332,29 @@
             this.defaultNpc.TabIndex = 13;
             this.defaultNpc.Text = "Load a file!";
             // 
-            // menuItem11
+            // label26
             // 
-            this.menuItem11.Index = 1;
-            this.menuItem11.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem12});
-            this.menuItem11.Text = "Edit";
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(375, 9);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(69, 15);
+            this.label26.TabIndex = 14;
+            this.label26.Text = "NPC Name:";
+            this.toolTip.SetToolTip(this.label26, "Optional parameter used by Wohlstand\'s PlatGEnWohl. \r\nThe name of the NPC.");
             // 
-            // menuItem12
+            // animationPaneMenuItem
             // 
-            this.menuItem12.Index = 0;
-            this.menuItem12.Text = "Change SMBX Directory";
-            this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
+            this.animationPaneMenuItem.Checked = true;
+            this.animationPaneMenuItem.Index = 1;
+            this.animationPaneMenuItem.Text = "Enable NPC Animation Pane";
+            this.animationPaneMenuItem.Click += new System.EventHandler(this.animationPaneMenuItem_Click);
+            // 
+            // npcNameTextBox
+            // 
+            this.npcNameTextBox.Location = new System.Drawing.Point(448, 6);
+            this.npcNameTextBox.Name = "npcNameTextBox";
+            this.npcNameTextBox.Size = new System.Drawing.Size(250, 23);
+            this.npcNameTextBox.TabIndex = 17;
             // 
             // Main
             // 
@@ -1335,12 +1362,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1170, 388);
+            this.ClientSize = new System.Drawing.Size(1170, 376);
+            this.Controls.Add(this.npcNameTextBox);
+            this.Controls.Add(this.label26);
             this.Controls.Add(this.defaultNpc);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.npcAnimationGroup);
             this.Controls.Add(this.grabTopCb);
             this.Controls.Add(this.grabSideCb);
             this.Controls.Add(this.groupBox3);
@@ -1352,6 +1381,7 @@
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SMBX NPC Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
@@ -1374,7 +1404,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
-            this.groupBox4.ResumeLayout(false);
+            this.npcAnimationGroup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1474,7 +1504,7 @@
         private System.Windows.Forms.MenuItem menuItem8;
         private System.Windows.Forms.MenuItem menuItem9;
         private System.Windows.Forms.MenuItem menuItem10;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox npcAnimationGroup;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -1495,5 +1525,8 @@
         private System.Windows.Forms.MenuItem menuItem11;
         private System.Windows.Forms.MenuItem menuItem12;
         private System.Windows.Forms.Label defaultNpc;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.MenuItem animationPaneMenuItem;
+        private Lerch.Samples.CueTextBox npcNameTextBox;
     }
 }
