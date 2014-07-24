@@ -143,11 +143,10 @@
             this.foregroundTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.label26 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.defaultNpc = new System.Windows.Forms.ToolStripStatusLabel();
-            this.npcNameTextBox = new Lerch.Samples.CueTextBox();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.npcNameTextBox = new Lerch.Samples.CueTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frames)).BeginInit();
@@ -554,7 +553,7 @@
             // menuItem9
             // 
             this.menuItem9.Index = 1;
-            this.menuItem9.Text = "SMBX Forums";
+            this.menuItem9.Text = "Official Program\'s Forums";
             this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
             // menuItem10
@@ -1242,6 +1241,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(3, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(354, 277);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -1344,16 +1344,6 @@
             this.label26.Text = "NPC Name:";
             this.toolTip.SetToolTip(this.label26, "Optional parameter used by Wohlstand\'s PlatGEnWohl. \r\nThe name of the NPC.");
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(925, 5);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "expNew";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1371,19 +1361,19 @@
             this.defaultNpc.Size = new System.Drawing.Size(64, 17);
             this.defaultNpc.Text = "Load a file!";
             // 
-            // npcNameTextBox
-            // 
-            this.npcNameTextBox.Location = new System.Drawing.Point(89, 5);
-            this.npcNameTextBox.Name = "npcNameTextBox";
-            this.npcNameTextBox.Size = new System.Drawing.Size(250, 23);
-            this.npcNameTextBox.TabIndex = 17;
-            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(494, 17);
             this.toolStripStatusLabel1.Text = "| Remember to Check off the Values you want to write to config file (furthest rig" +
     "ht checkbox)";
+            // 
+            // npcNameTextBox
+            // 
+            this.npcNameTextBox.Location = new System.Drawing.Point(89, 5);
+            this.npcNameTextBox.Name = "npcNameTextBox";
+            this.npcNameTextBox.Size = new System.Drawing.Size(250, 23);
+            this.npcNameTextBox.TabIndex = 17;
             // 
             // Main
             // 
@@ -1393,7 +1383,6 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1170, 395);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.npcNameTextBox);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.button3);
@@ -1410,6 +1399,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
+            this.MinimumSize = new System.Drawing.Size(0, 444);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SMBX NPC Editor";
@@ -1559,7 +1549,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.MenuItem animationPaneMenuItem;
         private Lerch.Samples.CueTextBox npcNameTextBox;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel defaultNpc;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;

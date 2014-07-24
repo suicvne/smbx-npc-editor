@@ -29,6 +29,7 @@ namespace smbxnpceditor
                     listViewGroupBox.Visible = true;
                     this.Size = new System.Drawing.Size(844, 573);
                     existingConfigRb.Text = string.Format("From Existing Configuration - Selected {0}", npcId);
+                    searchTextBox.Enabled = true;
                     break;
                 case(false):
                     listViewGroupBox.Visible = false;

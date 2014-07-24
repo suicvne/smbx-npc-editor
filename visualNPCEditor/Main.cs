@@ -37,6 +37,7 @@ namespace visualNPCEditor
         bool validData;
         public string smbxDirectory = null;
         public bool showAnimationPane = true;
+        public string curNpcId = "blank";
         IniFile defaultConfig;
         ModifyRegistry mr = new ModifyRegistry();
 
@@ -63,7 +64,7 @@ namespace visualNPCEditor
                 string name = Path.GetFileNameWithoutExtension(of.FileName);
                 string path = Path.GetDirectoryName(of.FileName);
                 string nameWGif = path + @"\" + name + ".gif";
-
+                curNpcId = name;
                 if (File.Exists(nameWGif))
                 {
                     try
@@ -255,10 +256,21 @@ namespace visualNPCEditor
         #region This all the various menu item stuff
         private void menuItem7_Click(object sender, EventArgs e)
         {
+            //curNpcId = "blank";
             workingFile = null;
             hasSaved = false;
-            resetAllItems();
-            defaultNpc.Text = "Load a file or save one!";
+            //resetAllItems();
+            //defaultNpc.Text = "Load a file or save one!";
+            NewConfig con = new NewConfig();
+            var result = con.ShowDialog();
+            switch (result)
+            {
+                case (DialogResult.OK):
+                    whichNPC(con);
+                    break;
+                case (DialogResult.Cancel):
+                    break;
+            }
             this.Text = "SMBX NPC Editor";
         }
         private void menuItem3_Click(object sender, EventArgs e)
@@ -313,7 +325,7 @@ namespace visualNPCEditor
 
         private void menuItem9_Click(object sender, EventArgs e)
         {
-            Process.Start("http://www.supermariobrosx.org/forums/");
+            Process.Start("http://forums.smbxepisodes.tk");
         }
 
         private void menuItem8_Click(object sender, EventArgs e)
@@ -324,32 +336,15 @@ namespace visualNPCEditor
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.Cancel == false)
+            if (MessageBox.Show("Are you sure you want to quit?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
-                Application.Exit();
+                e.Cancel = true;
+                //Application.Exit();
             }
             else
             {
-                if (MessageBox.Show("Are you sure you want to quit?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                {
-                    e.Cancel = false;
-                    try
-                    {
-                        File.Delete(Environment.CurrentDirectory + @"\npc-config.ini");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        StreamWriter sw = new StreamWriter(Environment.CurrentDirectory + @"\error.txt");
-                        sw.WriteLine("Hey man! there was an error when trying to delete the npc-config. \nYou can leave it there if you like\nDetails:{0}", ex.Message);
-                    }
-                    Application.Exit();
-
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
+                e.Cancel = false;
+                Environment.Exit(0);
             }
         }
         #endregion
@@ -1165,10 +1160,11 @@ namespace visualNPCEditor
             if (sf.ShowDialog() == DialogResult.OK)
             {
                 saveAll(sf.FileName);
+                hasSaved = true;
+                workingFile = sf.FileName.ToString();
+                curNpcId = Path.GetFileNameWithoutExtension(workingFile);
+                this.Text = "SMBX NPC Editor - " + Path.GetFileName(workingFile);
             }
-            hasSaved = true;
-            workingFile = sf.FileName.ToString();
-            this.Text = "SMBX NPC Editor - " + Path.GetFileName(workingFile);
         }
         #endregion
         #region Animation stuff, kindly coded by GhostHawk. Can't thank him enough!
@@ -1204,8 +1200,16 @@ namespace visualNPCEditor
         public void showSprite(string fileName)
         {
             //fileName = openFileDialog1.FileName;
-            fs = new FileStream(fileName, System.IO.FileMode.Open);
-            animatedImage = Image.FromStream(fs);
+            //fs = new FileStream(fileName, System.IO.FileMode.Open);
+            //animatedImage = Image.FromStream(fs);
+            using (Image sourceImg = Image.FromFile(fileName))
+            {
+                animatedImage = new Bitmap(sourceImg.Width, sourceImg.Height, PixelFormat.Format32bppArgb);
+                using (var copy = Graphics.FromImage(animatedImage))
+                {
+                    copy.DrawImage(sourceImg, 0, 0);
+                }
+            }
 
             pictureBox1.Image = animatedImage;
 
@@ -1213,29 +1217,77 @@ namespace visualNPCEditor
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             }
-            animateSprite();
+            animateSprite(curNpcId);
+            pictureBox1.Update();
         }
 
-        public void animateSprite()
+        public void animateSprite(string npcid)
         {
-            try
-            {
+            IniFile wohl = new IniFile(Environment.CurrentDirectory + @"\lvl_npc.ini");
                 int errorLevel = 0; //0 is no error, 1 is gfxheight, 2 is gfxwidth, 3 is both
                 if (npcGfxHeight.Value != 0)
                 {
-                    gfxHeight = Convert.ToInt32(npcGfxHeight.Value);
+                    if (npcHCb.Checked == true)
+                    {
+                        gfxHeight = Convert.ToInt32(npcGfxHeight.Value);
+                    }
+                    else
+                    {
+                        npcGfxHeight.Value = int.Parse(wohl.ReadValue(curNpcId, "gfx-height"));
+                        gfxHeight = (int)npcGfxHeight.Value;
+                    }
                 }
                 else
                 {
-                    errorLevel = 1;
+                    if (npcid != "blank")
+                    {
+                        try
+                        {
+                            
+                            gfxHeight = int.Parse(wohl.ReadValue(curNpcId, "gfx-height"));
+                            npcGfxHeight.Value = gfxHeight;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Can't load the gfxheight");
+                        }
+                    }
+                    else
+                    {
+                        errorLevel = 1;
+                    }
                 }
                 if (npcGfxWidth.Value != 0)
                 {
-                    gfxWidth = Convert.ToInt32(npcGfxWidth.Value);
+                    if (npcWCb.Checked == true)
+                    {
+                        gfxWidth = Convert.ToInt32(npcGfxWidth.Value);
+                    }
+                    else
+                    {
+                        npcGfxWidth.Value = int.Parse(wohl.ReadValue(curNpcId, "gfx-width"));
+                        gfxWidth = (int)npcGfxWidth.Value;
+                    }
                 }
                 else
                 {
-                    errorLevel = 2;
+                    if (npcid != "blank")
+                    {
+                        try
+                        {
+                            //IniFile wohl = new IniFile(Environment.CurrentDirectory + @"\lvl_npc.ini");
+                            gfxWidth = int.Parse(wohl.ReadValue(curNpcId, "gfx-width"));
+                            npcGfxWidth.Value = gfxWidth;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Can't load the gfxwidth");
+                        }
+                    }
+                    else
+                    {
+                        errorLevel = 2;
+                    }
                 }
 
                 if (npcGfxHeight.Value == 0 && npcGfxWidth.Value == 0)
@@ -1257,7 +1309,27 @@ namespace visualNPCEditor
                     break;
                 }
 
-                totalFrames = Convert.ToInt32(frames.Value);
+                if (frames.Value == 0)
+                {
+                    if (framesCb.Checked == true)
+                    {
+                        totalFrames = Convert.ToInt32(frames.Value);
+                    }
+                    else if (curNpcId != "blank")
+                    {
+                        //IniFile wohl = new IniFile(Environment.CurrentDirectory + @"\lvl_npc.ini");
+                        totalFrames = int.Parse(wohl.ReadValue(curNpcId, "frames"));
+                        frames.Value = totalFrames;
+                    }
+
+                }
+                else
+                {
+                    totalFrames = Convert.ToInt32(frames.Value);
+                }
+
+                //totalFrames = Convert.ToInt32(frames.Value);
+                
                 if (frameSpeedCb.Checked == true)
                 {
                     framesSpeed = Convert.ToInt32(frameSpeed.Value);
@@ -1321,19 +1393,19 @@ namespace visualNPCEditor
                         break;
                 }
                 timer1.Start();
-            }
+            //}
 
-            catch
-            {
-                timer1.Stop();
-                //Exception ex;
+            //catch(Exception ex)
+            //{
+                //timer1.Stop();
+                //MessageBox.Show(ex.Message);
 
-            }
+            //}
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            animateSprite();
+            animateSprite(curNpcId);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1476,6 +1548,7 @@ namespace visualNPCEditor
             string npc;
             if (_NewConfig.npcId != "blank")
             {
+                curNpcId = _NewConfig.npcId;
                 npc = _NewConfig.npcId;
                 loadFromWohl(npc, _NewConfig);
             }
