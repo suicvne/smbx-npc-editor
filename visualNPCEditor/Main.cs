@@ -48,7 +48,7 @@ namespace visualNPCEditor
 
         private void npcHCb_CheckedChanged(object sender, EventArgs e)
         {
-            npcHeight.Enabled = npcHCb.Checked;
+            npcGfxHeight.Enabled = npcHCb.Checked;
             //npcHitBoxHeight.npcHbH.Enabled = npcHCb.Checked;
         }
         //All the reading aka absolute chaos
@@ -89,11 +89,11 @@ namespace visualNPCEditor
                 }
                 else
                 {
-                    if (Directory.Exists(smbxDirectory))
+                    if (Directory.Exists(smbxDirectory + @"\graphics\npc"))
                     {
                         try
                         {
-                            showSprite(smbxDirectory + @"\" + name + ".gif");
+                            showSprite(smbxDirectory + @"\graphics\npc\" + name + ".gif");
                             this.Text = "SMBX NPC Editor - " + Path.GetFileName(of.FileName) + "; " + Path.GetFileName(nameWGif);
                         }
                         catch (Exception ex)
@@ -118,7 +118,7 @@ namespace visualNPCEditor
                 hasSaved = true;
                 workingFile = of.FileName;
             }
-            
+
         }
         #region Events
         private void scoreCb_CheckedChanged(object sender, EventArgs e)
@@ -134,7 +134,7 @@ namespace visualNPCEditor
 
         private void npcWCb_CheckedChanged(object sender, EventArgs e)
         {
-            npcWidth.Enabled = npcWCb.Checked;
+            npcGfxWidth.Enabled = npcWCb.Checked;
         }
 
         private void xOffsetCb_CheckedChanged(object sender, EventArgs e)
@@ -352,7 +352,7 @@ namespace visualNPCEditor
                 }
             }
         }
-#endregion
+        #endregion
         #region Drag and Drop Code
         private void menuItem10_Click(object sender, EventArgs e)
         {
@@ -443,22 +443,22 @@ namespace visualNPCEditor
                 Console.WriteLine("{0} is {1}", itemKey, itemValue);
                 switch (itemKey)
                 {
-                    case("name"):
+                    case ("name"):
                         string quotes = itemValue.ToString();
                         string withOut = quotes.Replace("\"", "");
                         npcNameTextBox.Text = withOut;
                         break;
-                    case("gfxoffsetx"):
+                    case ("gfxoffsetx"):
                         xOffsetCb.Checked = true;
                         xOffset.Text = itemValue.ToString();
                         xOffset.Enabled = true;
                         break;
-                    case("gfxoffsety"):
+                    case ("gfxoffsety"):
                         yOffsetCb.Checked = true;
                         yOffset.Text = itemValue.ToString();
                         xOffset.Enabled = true;
                         break;
-                    case("width"):
+                    case ("width"):
                         pNpcWidthCb.Checked = true;
                         if (Decimal.TryParse(itemValue, out number))
                         {
@@ -466,7 +466,7 @@ namespace visualNPCEditor
                             pNpcWidth.Enabled = true;
                         }
                         break;
-                    case("height"):
+                    case ("height"):
                         pNpcHeightCb.Checked = true;
                         if (Decimal.TryParse(itemValue, out number))
                         {
@@ -474,27 +474,27 @@ namespace visualNPCEditor
                             pNpcHeight.Value = number;
                         }
                         break;
-                    case("gfxwidth"):
+                    case ("gfxwidth"):
                         npcWCb.Checked = true;
                         if (Decimal.TryParse(itemValue, out number))
                         {
-                            npcWidth.Enabled = true;
-                            npcWidth.Value = number;
+                            npcGfxWidth.Enabled = true;
+                            npcGfxWidth.Value = number;
                         }
                         break;
-                    case("gfxheight"):
+                    case ("gfxheight"):
                         npcHCb.Checked = true;
                         if (Decimal.TryParse(itemValue, out number))
                         {
-                            npcHeight.Enabled = true;
-                            npcHeight.Value = number;
+                            npcGfxHeight.Enabled = true;
+                            npcGfxHeight.Value = number;
                         }
                         break;
-                    case("score"):
+                    case ("score"):
                         scoreCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 scoreList.Text = "None";
                                 break;
                             case ("1"):
@@ -536,163 +536,163 @@ namespace visualNPCEditor
                         }
                         scoreList.Enabled = true;
                         break;
-                    case("playerblock"):
+                    case ("playerblock"):
                         pCollisionCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 pCollision.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 pCollision.Checked = true;
                                 break;
                         }
                         pCollision.Enabled = true;
                         break;
-                    case("playerblocktop"):
+                    case ("playerblocktop"):
                         pCollisionTopCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 pCollisionTop.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 pCollisionTop.Checked = true;
                                 break;
                         }
                         pCollisionTop.Enabled = true;
                         break;
-                    case("npcblock"):
+                    case ("npcblock"):
                         npcCollisionCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 npcCollision.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 npcCollision.Checked = true;
                                 break;
                         }
                         npcCollision.Enabled = true;
                         break;
-                    case("npcblocktop"):
+                    case ("npcblocktop"):
                         npcCollisionTopCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 npcCollisionTop.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 npcCollisionTop.Checked = true;
                                 break;
                         }
                         npcCollisionTop.Enabled = true;
                         break;
-                    case("grabside"):
+                    case ("grabside"):
                         grabSideCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 grabSide.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 grabSide.Checked = true;
                                 break;
                         }
                         grabSide.Enabled = true;
                         break;
-                    case("grabtop"):
+                    case ("grabtop"):
                         grabTopCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 grabTop.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 grabTop.Checked = true;
                                 break;
                         }
                         grabTop.Enabled = true;
                         break;
-                    case("jumphurt"):
+                    case ("jumphurt"):
                         jumpHurtCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 jumpHurt.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 jumpHurt.Checked = true;
                                 break;
                         }
                         jumpHurt.Enabled = true;
                         break;
-                    case("nohurt"):
+                    case ("nohurt"):
                         dontHurtCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 dontHurt.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 dontHurt.Checked = true;
                                 break;
                         }
                         dontHurt.Enabled = true;
                         break;
-                    case("noblockcollision"):
+                    case ("noblockcollision"):
                         noBlockCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 noBlockCollision.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 noBlockCollision.Checked = true;
                                 break;
                         }
                         noBlockCollision.Enabled = true;
                         break;
-                    case("cliffturn"):
+                    case ("cliffturn"):
                         cliffTurnCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 cliffTurn.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 cliffTurn.Checked = true;
                                 break;
                         }
                         cliffTurn.Enabled = true;
                         break;
-                    case("noyoshi"):
+                    case ("noyoshi"):
                         noYoshiCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 noYoshi.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 noYoshi.Checked = true;
                                 break;
                         }
                         noYoshiCb.Enabled = true;
                         break;
-                    case("foreground"):
+                    case ("foreground"):
                         foregroundCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 foreground.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 foreground.Checked = true;
                                 break;
                         }
                         foreground.Enabled = true;
                         break;
-                    case("speed"):
+                    case ("speed"):
                         speedCb.Checked = true;
                         speed.Enabled = true;
                         if (Decimal.TryParse(itemValue, out number))
@@ -700,33 +700,33 @@ namespace visualNPCEditor
                             speed.Value = number;
                         }
                         break;
-                    case("nofireball"):
+                    case ("nofireball"):
                         noFireballCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 noFireball.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 noFireball.Checked = true;
                                 break;
                         }
                         noFireball.Enabled = true;
                         break;
-                    case("nogravity"):
+                    case ("nogravity"):
                         noGravityCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 noGravity.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 noGravity.Checked = true;
                                 break;
                         }
                         noGravity.Enabled = true;
                         break;
-                    case("frames"):
+                    case ("frames"):
                         framesCb.Checked = true;
                         frames.Enabled = true;
                         if (Decimal.TryParse(itemValue, out number))
@@ -734,7 +734,7 @@ namespace visualNPCEditor
                             frames.Value = number;
                         }
                         break;
-                    case("framespeed"):
+                    case ("framespeed"):
                         frameSpeedCb.Checked = true;
                         frameSpeed.Enabled = true;
                         if (Decimal.TryParse(itemValue, out number))
@@ -742,7 +742,7 @@ namespace visualNPCEditor
                             frameSpeed.Value = number;
                         }
                         break;
-                    case("framestyle"):
+                    case ("framestyle"):
                         frameStyleCb.Checked = true;
                         switch (itemValue)
                         {
@@ -758,14 +758,14 @@ namespace visualNPCEditor
                         }
                         frameStyle.Enabled = true;
                         break;
-                    case("noiceball"):
+                    case ("noiceball"):
                         noFreezeCb.Checked = true;
                         switch (itemValue)
                         {
-                            case("0"):
+                            case ("0"):
                                 noFreeze.Checked = false;
                                 break;
-                            case("1"):
+                            case ("1"):
                                 noFreeze.Checked = true;
                                 break;
                         }
@@ -777,8 +777,8 @@ namespace visualNPCEditor
         public void resetAllItems()
         {
             npcNameTextBox.Text = "";
-            npcHeight.Enabled = false;
-            npcWidth.Enabled = false;
+            npcGfxHeight.Enabled = false;
+            npcGfxWidth.Enabled = false;
             xOffset.Enabled = false;
             yOffset.Enabled = false;
             frames.Enabled = false;
@@ -858,16 +858,16 @@ namespace visualNPCEditor
             }
             if (npcHCb.Checked == true)
             {
-                if (npcHeight.Value != 0)
+                if (npcGfxHeight.Value != 0)
                 {
-                    sr.WriteLine("gfxheight=" + npcHeight.Value.ToString());
+                    sr.WriteLine("gfxheight=" + npcGfxHeight.Value.ToString());
                 }
             }
             if (npcWCb.Checked == true)
             {
-                if (npcWidth.Value != 0)
+                if (npcGfxWidth.Value != 0)
                 {
-                    sr.WriteLine("gfxwidth=" + npcWidth.Value.ToString());
+                    sr.WriteLine("gfxwidth=" + npcGfxWidth.Value.ToString());
                 }
             }
             if (xOffsetCb.Checked == true)
@@ -903,15 +903,15 @@ namespace visualNPCEditor
                 var style = frameStyle.SelectedIndex;
                 switch (style)
                 {
-                    case(0):
+                    case (0):
                         //single sprite
                         sr.WriteLine("framestyle=0");
                         break;
-                    case(1):
+                    case (1):
                         //Left/Right
                         sr.WriteLine("framestyle=1");
                         break;
-                    case(2):
+                    case (2):
                         sr.WriteLine("framestyle=2");
                         //Left/Right/Upside Down
                         break;
@@ -1028,43 +1028,43 @@ namespace visualNPCEditor
                 var score = scoreList.SelectedIndex;
                 switch (score)
                 {
-                    case(0):
+                    case (0):
                         sr.WriteLine("score=0");
                         break;
-                    case(1):
+                    case (1):
                         sr.WriteLine("score=1");
                         break;
-                    case(2):
+                    case (2):
                         sr.WriteLine("score=2");
                         break;
-                    case(3):
+                    case (3):
                         sr.WriteLine("score=3");
                         break;
-                    case(4):
+                    case (4):
                         sr.WriteLine("score=4");
                         break;
-                    case(5):
+                    case (5):
                         sr.WriteLine("score=5");
                         break;
-                    case(6):
+                    case (6):
                         sr.WriteLine("score=6");
                         break;
-                    case(7):
+                    case (7):
                         sr.WriteLine("score=7");
                         break;
-                    case(8):
+                    case (8):
                         sr.WriteLine("score=8");
                         break;
-                    case(9):
+                    case (9):
                         sr.WriteLine("score=9");
                         break;
-                    case(10):
+                    case (10):
                         sr.WriteLine("score=10");
                         break;
-                    case(11):
+                    case (11):
                         sr.WriteLine("score=11");
                         break;
-                    case(12):
+                    case (12):
                         sr.WriteLine("score=12");
                         break;
                 }
@@ -1203,8 +1203,8 @@ namespace visualNPCEditor
 
         public void showSprite(string fileName)
         {
-            imagePath = openFileDialog1.FileName;
-            fs = new FileStream(imagePath, System.IO.FileMode.Open);
+            //fileName = openFileDialog1.FileName;
+            fs = new FileStream(fileName, System.IO.FileMode.Open);
             animatedImage = Image.FromStream(fs);
 
             pictureBox1.Image = animatedImage;
@@ -1220,22 +1220,43 @@ namespace visualNPCEditor
         {
             try
             {
-                if (npcHCb.Checked == true)
+                int errorLevel = 0; //0 is no error, 1 is gfxheight, 2 is gfxwidth, 3 is both
+                if (npcGfxHeight.Value != 0)
                 {
-                    gfxHeight = Convert.ToInt32(npcHeight.Value);
+                    gfxHeight = Convert.ToInt32(npcGfxHeight.Value);
                 }
                 else
                 {
-                    gfxHeight = Convert.ToInt32(pNpcHeight.Value);
+                    errorLevel = 1;
                 }
-                if (npcWCb.Checked == true)
+                if (npcGfxWidth.Value != 0)
                 {
-                    gfxWidth = Convert.ToInt32(npcWidth.Value);
+                    gfxWidth = Convert.ToInt32(npcGfxWidth.Value);
                 }
                 else
                 {
-                    gfxWidth = Convert.ToInt32(pNpcWidth.Value);
+                    errorLevel = 2;
                 }
+
+                if (npcGfxHeight.Value == 0 && npcGfxWidth.Value == 0)
+                {
+                    errorLevel = 3;
+                }
+                switch(errorLevel)
+                {
+                    case(0):
+                        break;
+                    case(1):
+                        MessageBox.Show("Please input a value for Graphics height!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        break;
+                    case(2):
+                        MessageBox.Show("Please input a value for Graphics width!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    break;
+                    case(3):
+                        MessageBox.Show("Please input a value for Graphics height and Graphics Width!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    break;
+                }
+
                 totalFrames = Convert.ToInt32(frames.Value);
                 if (frameSpeedCb.Checked == true)
                 {
@@ -1312,7 +1333,7 @@ namespace visualNPCEditor
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            animateSprite();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1334,7 +1355,7 @@ namespace visualNPCEditor
 
             openFileDialog1.Title = "Open NPC Image";
             openFileDialog1.Filter = "SMBX Sprite Files (*.gif)|*gif";
-            TryReadRegistry:
+        TryReadRegistry:
             try
             {
                 var reg = mr.Read("SMBXDIRECTORY");
@@ -1347,13 +1368,13 @@ namespace visualNPCEditor
                         showAnimationPane = true;
                         animationPaneMenuItem.Checked = true;
                         //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(1176, 427);
+                        this.Size = new System.Drawing.Size(1176, 444);
                         break;
                     case ("false"):
                         showAnimationPane = false;
                         animationPaneMenuItem.Checked = false;
                         //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(799, 427);
+                        this.Size = new System.Drawing.Size(799, 444);
                         break;
                 }
                 goto CheckDirectory;
@@ -1363,20 +1384,20 @@ namespace visualNPCEditor
                 MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
                 goto BeginProgram;
             }
-            CheckDirectory:
-                if (smbxDirectory != null)
+        CheckDirectory:
+            if (smbxDirectory != null)
+            {
+                if (Directory.Exists(smbxDirectory) != false)
                 {
-                    if (Directory.Exists(smbxDirectory) != false)
-                    {
-                        //we all good!
-                    }
+                    //we all good!
                 }
-                else
-                {
-                    MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
-                }
-            BeginProgram:
-                Console.WriteLine("Loaded Configuration: SMBX64 Successfully");
+            }
+            else
+            {
+                MessageBox.Show("Looks like I can't find your SMBX directory.\nPlease go to Edit>Change SMBX Directory to select your SMBX Directory for default graphics reading");
+            }
+        BeginProgram:
+            Console.WriteLine("Loaded Configuration: SMBX64 Successfully");
         }
         private static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
         {
@@ -1435,5 +1456,317 @@ namespace visualNPCEditor
                     break;
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            NewConfig con = new NewConfig();
+            var result = con.ShowDialog();
+            switch (result)
+            {
+                case (DialogResult.OK):
+                    whichNPC(con);
+                    break;
+                case (DialogResult.Cancel):
+                    break;
+            }
+        }
+
+        public void whichNPC(NewConfig _NewConfig)
+        {
+            string npc;
+            if (_NewConfig.npcId != "blank")
+            {
+                npc = _NewConfig.npcId;
+                loadFromWohl(npc, _NewConfig);
+            }
+            else
+            {
+                npc = "blank";
+                resetAllItems();
+            }
+        }
+
+        public int frameSpeedConversion(int value)
+        {
+            if (value == 32 || value == 64 || value == 70 || value == 128 || value == 256)
+            {
+                switch (value)
+                {
+                    case (32):
+                        return 3;
+                    case (64):
+                        return 5;
+                    case (70):
+                        return 6;
+                    case (128):
+                        return 8;
+                    case (256):
+                        return 16;
+                }
+            }
+            else
+            {
+                return 8;
+            }
+            return 8;
+        }
+
+        public void loadFromWohl(string npcid, NewConfig nc)
+        {
+
+            xOffset.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "gfx-offset-x")); //xOffsetCb.Checked = true;
+            yOffset.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "gfx-offset-y")); //yOffsetCb.Checked = true;
+            npcGfxHeight.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "gfx-height")); //npcHCb.Checked = true;
+            npcGfxWidth.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "gfx-width")); //npcWCb.Checked = true;
+            //framestyle here
+            switch(int.Parse(nc.wohlConfig.ReadValue(npcid, "frame-style")))
+            {
+                case(0):
+                    frameStyle.SelectedIndex = 0;
+                    break;
+                case(1):
+                    frameStyle.SelectedIndex = 1;
+                    break;
+                case(2):
+                    frameStyle.SelectedIndex = 2;
+                    break;
+            }
+            frames.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "frames")); //framesCb.Checked = true;
+            //framespeed here
+            frameSpeed.Value = frameSpeedConversion(int.Parse(nc.wohlConfig.ReadValue(npcid, "frame-speed")));
+            switch (nc.wohlConfig.ReadValue(npcid, "foreground"))
+            {
+                case ("1"):
+                    foreground.Checked = true;
+                    foregroundCb.Checked = true;
+                    break;
+                case ("0"):
+                    foreground.Checked = false;
+                    foregroundCb.Checked = true;
+                    break;
+            }
+            //speed REALLY NEEDS A CONVERSION
+            //scoreCb.Checked = true;
+            string blah = nc.wohlConfig.ReadValue(npcid, "score");
+            int blahh = int.Parse(blah);
+            switch (blahh)
+            {
+                case (0):
+                    scoreList.SelectedIndex = 0;
+                    break;
+                case (1):
+                    scoreList.SelectedIndex = 1;
+                    break;
+                case (2):
+                    scoreList.SelectedIndex = 2;
+                    break;
+                case (3):
+                    scoreList.SelectedIndex = 3;
+                    break;
+                case (4):
+                    scoreList.SelectedIndex = 4;
+                    break;
+                case (5):
+                    scoreList.SelectedIndex = 5;
+                    break;
+                case (6):
+                    scoreList.SelectedIndex = 6;
+                    break;
+                case (7):
+                    scoreList.SelectedIndex = 7;
+                    break;
+                case (8):
+                    scoreList.SelectedIndex = 8;
+                    break;
+                case (9):
+                    scoreList.SelectedIndex = 9;
+                    break;
+                case (10):
+                    scoreList.SelectedIndex = 10;
+                    break;
+                case (11):
+                    scoreList.SelectedIndex = 11;
+                    break;
+                case (12):
+                    scoreList.SelectedIndex = 12;
+                    break;
+            }
+            //noyoshi
+            //noYoshiCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "yoshicaneat")))
+            {
+                case(1):
+                    noYoshi.Checked = false;
+                    break;
+                case(0):
+                    noYoshi.Checked = true;
+                    break;
+            }
+            //grabtop
+            //grabTopCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "grab-top")))
+            {
+                case (1):
+                    grabTop.Checked = true;
+                    break;
+                case (0):
+                    grabTop.Checked = false;
+                    break;
+            }
+            //grabside
+            //grabSideCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "grab-side")))
+            {
+                case (1):
+                    grabSide.Checked = true;
+                    break;
+                case (0):
+                    grabSide.Checked = false;
+                    break;
+            }
+            //nohurt needs conversion too
+            //dontHurtCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "hurtplayer")))
+            {
+                case(1):
+                    dontHurt.Checked = false;
+                    break;
+                case(0):
+                    dontHurt.Checked = true;
+                    break;
+            }
+            //width (physics/hitbox)
+            pNpcWidth.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "fixture-width")); //pNpcWidthCb.Checked = true;
+            //height (physics/hitbox)
+            pNpcHeight.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "fixture-height")); //pNpcHeightCb.Checked = true;
+            //npcblock
+            //npcCollisionCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "block-npc")))
+            {
+                case (1):
+                    npcCollision.Checked = true;
+                    break;
+                case (0):
+                    npcCollision.Checked = false;
+                    break;
+            }
+            //npcblocktop
+            //npcCollisionTopCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "block-npc-top")))
+            {
+                case (1):
+                    npcCollisionTop.Checked = true;
+                    break;
+                case (0):
+                    npcCollisionTop.Checked = true;
+                    break;
+            }
+            //playerblock
+            //pCollisionCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "block-player")))
+            {
+                case (1):
+                    pCollision.Checked = true;
+                    break;
+                case (0):
+                    pCollision.Checked = false;
+                    break;
+            }
+            //playerblocktop
+            //pCollisionTopCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "block-player-top")))
+            {
+                case (1):
+                    pCollisionTop.Checked = true;
+                    break;
+                case (0):
+                    pCollisionTop.Checked = true;
+                    break;
+            }
+            //gravity needs conversion
+            //noGravityCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "gravity")))
+            {
+                case(1):
+                    noGravity.Checked = false;
+                    break;
+                case(0):
+                    noGravity.Checked = true;
+                    break;
+            }
+            //nofireball
+            //noFireballCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "kill-fireball")))
+            {
+                case (1):
+                    noFireball.Checked = false;
+                    break;
+                case (0):
+                    noFireball.Checked = true;
+                    break;
+            }
+            //noiceball
+            //noFreezeCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "kill-iceball")))
+            {
+                case (1):
+                    noFreeze.Checked = false;
+                    break;
+                case (0):
+                    noFreeze.Checked = true;
+                    break;
+            }
+            //cliffturn
+            //cliffTurnCb.Checked = true;
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "cliffturn")))
+            {
+                case(1):
+                    cliffTurn.Checked = true;
+                    break;
+                case(0):
+                    cliffTurn.Checked = false;
+                    break;
+            }
+            //jumphurt
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "kill-onjump")))
+            {
+                case(1):
+                    jumpHurt.Checked = false;
+                    break;
+                case(0):
+                    jumpHurt.Checked = true;
+                    break;
+            }
+            //noblockcollision
+            switch (int.Parse(nc.wohlConfig.ReadValue(npcid, "collision-blocks")))
+            {
+                case(1):
+                    noBlockCollision.Checked = false;
+                    break;
+                case(0):
+                    noBlockCollision.Checked = true;
+                    break;
+            }
+            //name
+            npcNameTextBox.Text = nc.wohlConfig.ReadValue(npcid, "name");
+            tryLoadGif(npcid);
+            defaultNpc.Text = "This NPC will replace " + nc.wohlConfig.ReadValue(npcid, "name");
+        }
+        public void tryLoadGif(string npc)
+        {
+            string dir = mr.Read("SMBXDIRECTORY") + @"\graphics\npc";
+            if (Directory.Exists(dir))
+            {
+                try
+                {
+                    showSprite(String.Format(@"{0}\{1}.gif", dir, npc));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error while loading sprite {0}.gif: {1}", npc, ex.Message);
+                }
+            }
+        }
+        //end of class
     }
 }

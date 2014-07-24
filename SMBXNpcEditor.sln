@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMBXNpcEditor", "visualNPCE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPC-config-generator", "NPC-config-generator\NPC-config-generator.csproj", "{C91C307E-86B9-4A50-A922-0DDE29C13CAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPC-Sprite-Generator", "NPC-Sprite-Generator\NPC-Sprite-Generator.csproj", "{10BF9C6D-BC7B-4CDE-88A2-C23964D93E87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Real-Npc-Sprite", "Real-Npc-Sprite\Real-Npc-Sprite.csproj", "{8DA3F825-3FAC-4C77-8481-9E58354E7663}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +23,14 @@ Global
 		{C91C307E-86B9-4A50-A922-0DDE29C13CAE}.Debug|x86.Build.0 = Debug|x86
 		{C91C307E-86B9-4A50-A922-0DDE29C13CAE}.Release|x86.ActiveCfg = Release|x86
 		{C91C307E-86B9-4A50-A922-0DDE29C13CAE}.Release|x86.Build.0 = Release|x86
+		{10BF9C6D-BC7B-4CDE-88A2-C23964D93E87}.Debug|x86.ActiveCfg = Debug|x86
+		{10BF9C6D-BC7B-4CDE-88A2-C23964D93E87}.Debug|x86.Build.0 = Debug|x86
+		{10BF9C6D-BC7B-4CDE-88A2-C23964D93E87}.Release|x86.ActiveCfg = Release|x86
+		{10BF9C6D-BC7B-4CDE-88A2-C23964D93E87}.Release|x86.Build.0 = Release|x86
+		{8DA3F825-3FAC-4C77-8481-9E58354E7663}.Debug|x86.ActiveCfg = Debug|x86
+		{8DA3F825-3FAC-4C77-8481-9E58354E7663}.Debug|x86.Build.0 = Debug|x86
+		{8DA3F825-3FAC-4C77-8481-9E58354E7663}.Release|x86.ActiveCfg = Release|x86
+		{8DA3F825-3FAC-4C77-8481-9E58354E7663}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

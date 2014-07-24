@@ -50,10 +50,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.npcWidth = new System.Windows.Forms.NumericUpDown();
+            this.npcGfxWidth = new System.Windows.Forms.NumericUpDown();
             this.npcWCb = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.npcHeight = new System.Windows.Forms.NumericUpDown();
+            this.npcGfxHeight = new System.Windows.Forms.NumericUpDown();
             this.npcHCb = new System.Windows.Forms.CheckBox();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
@@ -64,6 +64,7 @@
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItem11 = new System.Windows.Forms.MenuItem();
             this.menuItem12 = new System.Windows.Forms.MenuItem();
+            this.animationPaneMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
@@ -141,17 +142,19 @@
             this.frameStyleTip = new System.Windows.Forms.ToolTip(this.components);
             this.foregroundTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.defaultNpc = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.animationPaneMenuItem = new System.Windows.Forms.MenuItem();
+            this.button4 = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.defaultNpc = new System.Windows.Forms.ToolStripStatusLabel();
             this.npcNameTextBox = new Lerch.Samples.CueTextBox();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frames)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xOffset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcGfxWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcGfxHeight)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pNpcHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pNpcWidth)).BeginInit();
@@ -159,6 +162,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
             this.npcAnimationGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -182,10 +186,10 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.npcWidth);
+            this.groupBox1.Controls.Add(this.npcGfxWidth);
             this.groupBox1.Controls.Add(this.npcWCb);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.npcHeight);
+            this.groupBox1.Controls.Add(this.npcGfxHeight);
             this.groupBox1.Controls.Add(this.npcHCb);
             this.groupBox1.Location = new System.Drawing.Point(14, 35);
             this.groupBox1.Name = "groupBox1";
@@ -401,19 +405,19 @@
             this.label2.Text = "Width:";
             this.npcWidthTip.SetToolTip(this.label2, "The width, in pixels, of the NPC. Not related to physics");
             // 
-            // npcWidth
+            // npcGfxWidth
             // 
-            this.npcWidth.Enabled = false;
-            this.npcWidth.Location = new System.Drawing.Point(91, 60);
-            this.npcWidth.Maximum = new decimal(new int[] {
+            this.npcGfxWidth.Enabled = false;
+            this.npcGfxWidth.Location = new System.Drawing.Point(91, 60);
+            this.npcGfxWidth.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
-            this.npcWidth.Name = "npcWidth";
-            this.npcWidth.Size = new System.Drawing.Size(134, 23);
-            this.npcWidth.TabIndex = 2;
-            this.npcHeightTip.SetToolTip(this.npcWidth, "The width, in pixels, of the NPC. Not related to physics");
+            this.npcGfxWidth.Name = "npcGfxWidth";
+            this.npcGfxWidth.Size = new System.Drawing.Size(134, 23);
+            this.npcGfxWidth.TabIndex = 2;
+            this.npcHeightTip.SetToolTip(this.npcGfxWidth, "The width, in pixels, of the NPC. Not related to physics");
             // 
             // npcWCb
             // 
@@ -435,19 +439,19 @@
             this.label1.Text = "Height:";
             this.npcHeightTip.SetToolTip(this.label1, "The height, in pixels, of the NPC. Not related to the physics.");
             // 
-            // npcHeight
+            // npcGfxHeight
             // 
-            this.npcHeight.Enabled = false;
-            this.npcHeight.Location = new System.Drawing.Point(91, 27);
-            this.npcHeight.Maximum = new decimal(new int[] {
+            this.npcGfxHeight.Enabled = false;
+            this.npcGfxHeight.Location = new System.Drawing.Point(91, 27);
+            this.npcGfxHeight.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
-            this.npcHeight.Name = "npcHeight";
-            this.npcHeight.Size = new System.Drawing.Size(134, 23);
-            this.npcHeight.TabIndex = 1;
-            this.xOffsetTip.SetToolTip(this.npcHeight, "The height, in pixels, of the NPC. Not related to the physics.");
+            this.npcGfxHeight.Name = "npcGfxHeight";
+            this.npcGfxHeight.Size = new System.Drawing.Size(134, 23);
+            this.npcGfxHeight.TabIndex = 1;
+            this.xOffsetTip.SetToolTip(this.npcGfxHeight, "The height, in pixels, of the NPC. Not related to the physics.");
             // 
             // npcHCb
             // 
@@ -524,6 +528,13 @@
             this.menuItem12.Index = 0;
             this.menuItem12.Text = "Change SMBX Directory";
             this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
+            // 
+            // animationPaneMenuItem
+            // 
+            this.animationPaneMenuItem.Checked = true;
+            this.animationPaneMenuItem.Index = 1;
+            this.animationPaneMenuItem.Text = "Enable NPC Animation Pane";
+            this.animationPaneMenuItem.Click += new System.EventHandler(this.animationPaneMenuItem_Click);
             // 
             // menuItem6
             // 
@@ -1323,49 +1334,68 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.ToolTipTitle = "Information";
             // 
-            // defaultNpc
-            // 
-            this.defaultNpc.AutoSize = true;
-            this.defaultNpc.Location = new System.Drawing.Point(16, 9);
-            this.defaultNpc.Name = "defaultNpc";
-            this.defaultNpc.Size = new System.Drawing.Size(64, 15);
-            this.defaultNpc.TabIndex = 13;
-            this.defaultNpc.Text = "Load a file!";
-            // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(375, 9);
+            this.label26.Location = new System.Drawing.Point(16, 8);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(69, 15);
             this.label26.TabIndex = 14;
             this.label26.Text = "NPC Name:";
             this.toolTip.SetToolTip(this.label26, "Optional parameter used by Wohlstand\'s PlatGEnWohl. \r\nThe name of the NPC.");
             // 
-            // animationPaneMenuItem
+            // button4
             // 
-            this.animationPaneMenuItem.Checked = true;
-            this.animationPaneMenuItem.Index = 1;
-            this.animationPaneMenuItem.Text = "Enable NPC Animation Pane";
-            this.animationPaneMenuItem.Click += new System.EventHandler(this.animationPaneMenuItem_Click);
+            this.button4.Location = new System.Drawing.Point(925, 5);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 18;
+            this.button4.Text = "expNew";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultNpc,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1170, 22);
+            this.statusStrip1.TabIndex = 19;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // defaultNpc
+            // 
+            this.defaultNpc.Name = "defaultNpc";
+            this.defaultNpc.Size = new System.Drawing.Size(64, 17);
+            this.defaultNpc.Text = "Load a file!";
             // 
             // npcNameTextBox
             // 
-            this.npcNameTextBox.Location = new System.Drawing.Point(448, 6);
+            this.npcNameTextBox.Location = new System.Drawing.Point(89, 5);
             this.npcNameTextBox.Name = "npcNameTextBox";
             this.npcNameTextBox.Size = new System.Drawing.Size(250, 23);
             this.npcNameTextBox.TabIndex = 17;
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(494, 17);
+            this.toolStripStatusLabel1.Text = "| Remember to Check off the Values you want to write to config file (furthest rig" +
+    "ht checkbox)";
             // 
             // Main
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1170, 376);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1170, 395);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.npcNameTextBox);
             this.Controls.Add(this.label26);
-            this.Controls.Add(this.defaultNpc);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -1395,8 +1425,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.frames)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xOffset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.npcHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcGfxWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.npcGfxHeight)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pNpcHeight)).EndInit();
@@ -1406,6 +1436,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
             this.npcAnimationGroup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1422,9 +1454,9 @@
         private System.Windows.Forms.MenuItem menuItem5;
         private System.Windows.Forms.CheckBox npcHCb;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown npcHeight;
+        private System.Windows.Forms.NumericUpDown npcGfxHeight;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown npcWidth;
+        private System.Windows.Forms.NumericUpDown npcGfxWidth;
         private System.Windows.Forms.CheckBox npcWCb;
         private System.Windows.Forms.NumericUpDown yOffset;
         private System.Windows.Forms.CheckBox yOffsetCb;
@@ -1524,9 +1556,12 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.MenuItem menuItem11;
         private System.Windows.Forms.MenuItem menuItem12;
-        private System.Windows.Forms.Label defaultNpc;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.MenuItem animationPaneMenuItem;
         private Lerch.Samples.CueTextBox npcNameTextBox;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel defaultNpc;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

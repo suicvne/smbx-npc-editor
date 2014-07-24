@@ -1,0 +1,31 @@
+Wohl to SMBX
+Reference document for converting Wohl's NPC ini format to the SMBX bound ones for display in my
+editor
+
+name - name
+gfx-offset-x - gfxoffsetx
+gfx-offset-y - gfxoffsety
+gfx-height - gfxheight
+gfx-width - gfxwidth
+frame-style - framestyle
+frames - frames
+frame-speed - framespeed (needs conversion)
+foreground - foreground
+speed - speed (needs conversion)
+score - score
+yoshicaneat - noyoshi (needs conversion - 1 = 0, etc)
+grab-side - grabside
+grab-top - grabtop
+hurtplayer - nohurt (needs conversion - hurtplayer=1 is nohurt=0)
+fixture-width - width
+fixture-height - height
+block-npc - npcblock
+block-npc-top - npcblocktop
+block-player - playerblock
+block-player-top - playerblocktop
+gravity - nogravity (needs conversion - gravity=1 is nogravity=0)
+kill-fireball - nofireball (needs conversion - kill-fireball=1 is nofireball=0)
+kill-iceball - noiceball (needs conversion - kill-iceball=1 is noiceball=0)
+cliffturn - cliffturn
+kill-onjump - jumphurt (needs conversion - kill-onjump=1 is jumphurt=0)
+collision-blocks - noblockcollision (needs conversion - collision-blocks=1 is noblockcollision=0)

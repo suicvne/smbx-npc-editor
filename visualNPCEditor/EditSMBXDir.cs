@@ -50,7 +50,7 @@ namespace smbxnpceditor
         {
             try
             {
-                mr.Write("SMBXDIRECTORY", dir.Text + @"\graphics\npc");
+                mr.Write("SMBXDIRECTORY", dir.Text);
                 MessageBox.Show("Saved successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
