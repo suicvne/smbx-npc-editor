@@ -1155,6 +1155,10 @@ namespace visualNPCEditor
         {
             SaveFileDialog sf = new SaveFileDialog();
             sf.Filter = "NPC Text Files (npc-*.txt)|npc-*.txt|All files (*.*)|*.*";
+            if (curNpcId != "blank")
+            {
+                sf.FileName = String.Format("{0}.txt", curNpcId);
+            }
             sf.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).ToString();
 
             if (sf.ShowDialog() == DialogResult.OK)
@@ -1611,11 +1615,11 @@ namespace visualNPCEditor
             {
                 case ("1"):
                     foreground.Checked = true;
-                    foregroundCb.Checked = true;
+                    //foregroundCb.Checked = true;
                     break;
                 case ("0"):
                     foreground.Checked = false;
-                    foregroundCb.Checked = true;
+                    //foregroundCb.Checked = true;
                     break;
             }
             //speed REALLY NEEDS A CONVERSION
