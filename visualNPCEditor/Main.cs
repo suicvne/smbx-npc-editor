@@ -15,6 +15,7 @@ using Utility.ModifyRegistry;
 using Setting;
 using System.Reflection;
 using System.Drawing.Imaging;
+using Microsoft.VisualBasic;
 
 namespace visualNPCEditor
 {
@@ -525,7 +526,10 @@ namespace visualNPCEditor
                             case ("11"):
                                 scoreList.Text = "2-Up";
                                 break;
-                            case ("12"):
+                            case("12"):
+                                scoreList.Text = "3-Up";
+                                break;
+                            case ("13"):
                                 scoreList.Text = "5-Up";
                                 break;
                         }
@@ -1062,6 +1066,9 @@ namespace visualNPCEditor
                     case (12):
                         sr.WriteLine("score=12");
                         break;
+                    case(13):
+                        sr.WriteLine("score=13");
+                        break;
                 }
             }
             if (grabSideCb.Checked == true)
@@ -1193,12 +1200,23 @@ namespace visualNPCEditor
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            openFileDialog1.FileName = "";
             openFileDialog1.ShowDialog();
+            
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             showSprite(openFileDialog1.FileName);
+            try
+            {
+                string id = Path.GetFileNameWithoutExtension(openFileDialog1.FileName).ToString();
+                string path = Path.GetDirectoryName(openFileDialog1.FileName).ToString();
+                readFile(path + @"\" + id + ".txt");
+                animateSprite(id);
+            }
+            catch(Exception IGNORE_THIS)
+            { Console.WriteLine("No text file with the graphic..cool cool B)"); }
         }
 
         public void showSprite(string fileName)
@@ -1237,8 +1255,15 @@ namespace visualNPCEditor
                     }
                     else
                     {
-                        npcGfxHeight.Value = int.Parse(wohl.ReadValue(curNpcId, "gfx-height"));
-                        gfxHeight = (int)npcGfxHeight.Value;
+                        if (curNpcId != "blank")
+                        {
+                            npcGfxHeight.Value = int.Parse(wohl.ReadValue(curNpcId, "gfx-height"));
+                            gfxHeight = (int)npcGfxHeight.Value;
+                        }
+                        else
+                        {
+                            gfxHeight = pictureBox1.Image.Height;
+                        }
                     }
                 }
                 else
@@ -1269,8 +1294,15 @@ namespace visualNPCEditor
                     }
                     else
                     {
-                        npcGfxWidth.Value = int.Parse(wohl.ReadValue(curNpcId, "gfx-width"));
-                        gfxWidth = (int)npcGfxWidth.Value;
+                        if (curNpcId != "blank")
+                        {
+                            npcGfxWidth.Value = int.Parse(wohl.ReadValue(curNpcId, "gfx-width"));
+                            gfxWidth = (int)npcGfxWidth.Value;
+                        }
+                        else
+                        {
+                            gfxWidth = pictureBox1.Image.Width;
+                        }
                     }
                 }
                 else
@@ -1438,20 +1470,47 @@ namespace visualNPCEditor
                 smbxDirectory = reg.ToString();
                 var enableAnimation = mr.Read("SHOWANIMATION");
                 //799, 434
-                switch (enableAnimation)
+                //height needs to be 460 on windows 8 apparently
+                Microsoft.VisualBasic.Devices.Computer MyComputer = new Microsoft.VisualBasic.Devices.Computer();
+                string ver = MyComputer.Info.OSVersion;
+                string[] split = ver.Split(new char[] { '.' });
+                string final = split[0].ToString() + "." + split[1].ToString();
+                decimal finall = decimal.Parse(final);
+                if(finall == (decimal)6.2 || finall == (decimal)6.3 || finall > (decimal)6.3)
                 {
-                    case ("true"):
-                        showAnimationPane = true;
-                        animationPaneMenuItem.Checked = true;
-                        //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(1176, 444);
-                        break;
-                    case ("false"):
-                        showAnimationPane = false;
-                        animationPaneMenuItem.Checked = false;
-                        //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(799, 444);
-                        break;
+                    switch (enableAnimation)
+                    {
+                        case ("true"):
+                            showAnimationPane = true;
+                            animationPaneMenuItem.Checked = true;
+                            //npcAnimationGroup.Visible = true;
+                            this.Size = new System.Drawing.Size(1176, 460);
+                            break;
+                        case ("false"):
+                            showAnimationPane = false;
+                            animationPaneMenuItem.Checked = false;
+                            //npcAnimationGroup.Visible = true;
+                            this.Size = new System.Drawing.Size(799, 460);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (enableAnimation)
+                    {
+                        case ("true"):
+                            showAnimationPane = true;
+                            animationPaneMenuItem.Checked = true;
+                            //npcAnimationGroup.Visible = true;
+                            this.Size = new System.Drawing.Size(1176, 444);
+                            break;
+                        case ("false"):
+                            showAnimationPane = false;
+                            animationPaneMenuItem.Checked = false;
+                            //npcAnimationGroup.Visible = true;
+                            this.Size = new System.Drawing.Size(799, 444);
+                            break;
+                    }
                 }
                 goto CheckDirectory;
             }
@@ -1501,6 +1560,47 @@ namespace visualNPCEditor
 
         private void animationPaneMenuItem_Click(object sender, EventArgs e)
         {
+            Microsoft.VisualBasic.Devices.Computer MyComputer = new Microsoft.VisualBasic.Devices.Computer();
+            string ver = MyComputer.Info.OSVersion;
+            string[] split = ver.Split(new char[] { '.' });
+            string final = split[0].ToString() + "." + split[1].ToString();
+            decimal finall = decimal.Parse(final);
+            if (finall == (decimal)6.2 || finall == (decimal)6.3 || finall > (decimal)6.3)
+            {
+                switch (enableAnimation)
+                {
+                    case ("true"):
+                        showAnimationPane = true;
+                        animationPaneMenuItem.Checked = true;
+                        //npcAnimationGroup.Visible = true;
+                        this.Size = new System.Drawing.Size(1176, 460);
+                        break;
+                    case ("false"):
+                        showAnimationPane = false;
+                        animationPaneMenuItem.Checked = false;
+                        //npcAnimationGroup.Visible = true;
+                        this.Size = new System.Drawing.Size(799, 460);
+                        break;
+                }
+            }
+            else
+            {
+                switch (enableAnimation)
+                {
+                    case ("true"):
+                        showAnimationPane = true;
+                        animationPaneMenuItem.Checked = true;
+                        //npcAnimationGroup.Visible = true;
+                        this.Size = new System.Drawing.Size(1176, 444);
+                        break;
+                    case ("false"):
+                        showAnimationPane = false;
+                        animationPaneMenuItem.Checked = false;
+                        //npcAnimationGroup.Visible = true;
+                        this.Size = new System.Drawing.Size(799, 444);
+                        break;
+                }
+            }
             switch (animationPaneMenuItem.Checked)
             {
                 case (true):
@@ -1842,6 +1942,29 @@ namespace visualNPCEditor
                 {
                     Console.WriteLine("Error while loading sprite {0}.gif: {1}", npc, ex.Message);
                 }
+            }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            pictureBox1.Image = null;
+        }
+
+        private void reflectButton_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.SuspendLayout();
+                //Bitmap sprite = (Bitmap)pictureBox1.Image;
+                //sprite.RotateFlip(RotateFlipType.Rotate180FlipY);
+                animatedImage.RotateFlip(RotateFlipType.Rotate180FlipY);
+                pictureBox1.Image = animatedImage;
+                pictureBox1.Update();
+                timer1.Stop();
+                animateSprite(curNpcId);
+                pictureBox1.Show();
+                //animateSprite(curNpcId);
             }
         }
         //end of class

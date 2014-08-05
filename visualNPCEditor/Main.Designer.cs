@@ -146,6 +146,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.defaultNpc = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.reflectButton = new System.Windows.Forms.Button();
             this.npcNameTextBox = new Lerch.Samples.CueTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frameSpeed)).BeginInit();
@@ -245,10 +247,20 @@
             // 
             this.frames.Enabled = false;
             this.frames.Location = new System.Drawing.Point(91, 162);
+            this.frames.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.frames.Name = "frames";
             this.frames.Size = new System.Drawing.Size(134, 23);
             this.frames.TabIndex = 4;
             this.framesTip.SetToolTip(this.frames, "The number of frames the NPC has.");
+            this.frames.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // frameStyle
             // 
@@ -413,10 +425,20 @@
             0,
             0,
             0});
+            this.npcGfxWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.npcGfxWidth.Name = "npcGfxWidth";
             this.npcGfxWidth.Size = new System.Drawing.Size(134, 23);
             this.npcGfxWidth.TabIndex = 2;
             this.npcHeightTip.SetToolTip(this.npcGfxWidth, "The width, in pixels, of the NPC. Not related to physics");
+            this.npcGfxWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // npcWCb
             // 
@@ -447,10 +469,20 @@
             0,
             0,
             0});
+            this.npcGfxHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.npcGfxHeight.Name = "npcGfxHeight";
             this.npcGfxHeight.Size = new System.Drawing.Size(134, 23);
             this.npcGfxHeight.TabIndex = 1;
             this.xOffsetTip.SetToolTip(this.npcGfxHeight, "The height, in pixels, of the NPC. Not related to the physics.");
+            this.npcGfxHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // npcHCb
             // 
@@ -834,10 +866,20 @@
             0,
             0,
             0});
+            this.pNpcHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.pNpcHeight.Name = "pNpcHeight";
             this.pNpcHeight.Size = new System.Drawing.Size(79, 23);
             this.pNpcHeight.TabIndex = 8;
             this.toolTip.SetToolTip(this.pNpcHeight, "The height, in pixels, of the in-game hitbox.");
+            this.pNpcHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // pNpcWidth
             // 
@@ -848,10 +890,20 @@
             0,
             0,
             0});
+            this.pNpcWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.pNpcWidth.Name = "pNpcWidth";
             this.pNpcWidth.Size = new System.Drawing.Size(79, 23);
             this.pNpcWidth.TabIndex = 9;
             this.npcHeightTip.SetToolTip(this.pNpcWidth, "The width, in pixels, of the in-game hitbox.");
+            this.pNpcWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // pNpcHeightCb
             // 
@@ -1184,6 +1236,7 @@
             "8000",
             "1-Up",
             "2-Up",
+            "3-Up",
             "5-Up"});
             this.scoreList.Location = new System.Drawing.Point(110, 28);
             this.scoreList.Name = "scoreList";
@@ -1247,9 +1300,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1066, 340);
+            this.button1.Location = new System.Drawing.Point(1074, 340);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 27);
+            this.button1.Size = new System.Drawing.Size(79, 27);
             this.button1.TabIndex = 10;
             this.button1.Text = "Browse...";
             this.button1.UseVisualStyleBackColor = true;
@@ -1257,9 +1310,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(889, 340);
+            this.button2.Location = new System.Drawing.Point(857, 340);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(171, 27);
+            this.button2.Size = new System.Drawing.Size(52, 27);
             this.button2.TabIndex = 11;
             this.button2.Text = "Start";
             this.button2.UseVisualStyleBackColor = true;
@@ -1278,7 +1331,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(796, 340);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 27);
+            this.button3.Size = new System.Drawing.Size(55, 27);
             this.button3.TabIndex = 12;
             this.button3.Text = "Stop";
             this.button3.UseVisualStyleBackColor = true;
@@ -1349,7 +1402,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.defaultNpc,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 382);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1170, 22);
             this.statusStrip1.TabIndex = 19;
@@ -1368,6 +1421,26 @@
             this.toolStripStatusLabel1.Text = "| Remember to Check off the Values you want to write to config file (furthest rig" +
     "ht checkbox)";
             // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(915, 340);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(47, 27);
+            this.clearButton.TabIndex = 20;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
+            // reflectButton
+            // 
+            this.reflectButton.Location = new System.Drawing.Point(968, 340);
+            this.reflectButton.Name = "reflectButton";
+            this.reflectButton.Size = new System.Drawing.Size(100, 27);
+            this.reflectButton.TabIndex = 22;
+            this.reflectButton.Text = "Reflect Sprite";
+            this.reflectButton.UseVisualStyleBackColor = true;
+            this.reflectButton.Click += new System.EventHandler(this.reflectButton_Click);
+            // 
             // npcNameTextBox
             // 
             this.npcNameTextBox.Location = new System.Drawing.Point(89, 5);
@@ -1381,7 +1454,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1170, 395);
+            this.ClientSize = new System.Drawing.Size(1170, 404);
+            this.Controls.Add(this.reflectButton);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.npcNameTextBox);
             this.Controls.Add(this.label26);
@@ -1399,7 +1474,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
-            this.MinimumSize = new System.Drawing.Size(0, 444);
+            this.MinimumSize = new System.Drawing.Size(16, 444);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SMBX NPC Editor";
@@ -1552,5 +1627,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel defaultNpc;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button reflectButton;
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Setting;
 using System.Drawing;
 using ns;
 using System.Windows.Forms;
@@ -12,7 +11,6 @@ namespace NPC_Sprite_Generator
 {
     class Program
     {
-        static IniFile wohlConfig;
         [STAThread]
         static void Main(string[] args)
         {
