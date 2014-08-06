@@ -118,7 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>---1.3.1.0---
+    <value>---1.4.2.0---
+-Lots of minor tweaks and stuff to saving, loading, etc
+-Fixed a bug where Windows 8 users had cutoff windows (ffs)
+-Added a "clear" and "reflect sprite" button to the NPC Animation pane. Reflect sprite literally reflects, is just for previewing only
+-Finally updated this changelog ffs
+-Updated the About box too
+
+---1.4.0.0---
+-Fixed a bug where the application would ask you twice if you wanted to exit
+-Fixed a bug where if you tried to open a file you already opened, you would get an AccessDenied error
+-Fixed a bug where the "Changed SMBX Directory" would append "\graphics\npc" to the path (lolwut)
+-Added a database (thanks to Wohl's configuration) of built in NPC's from SMBX
+-Added warnings for when you try to animate and you don't have these values set (gfxheight, gfxwidth, frames)
+-Tweaked the save as algorithm
+-Implemented an algorithm that determines whether or not to use the default values or defined values for gfxheight, gfxwidth, or frames for the animator
+-Implemented a status bar
+-Changed the animator algorithm to use the "Graphics" Height/Width, which is the gfxheight and gfxwidth in game
+-Changed the "SMBX Forums" link to the official program's forums
+
+---1.3.1.0---
 -You can now choose to enable or disable NPC Animation Pane if it's too wide for you
 -Added support for Wohlstand's "NPC Name"
 -Added Knux's forum and a license to the about box

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SMBX NPC Editor")]
 [assembly: AssemblyDescription("A nice visual editor for making custom NPC's")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Mike Santiago")]
+[assembly: AssemblyCompany("Luigicorp")]
 [assembly: AssemblyProduct("SMBX NPC Editor")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © Luigicorp  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
