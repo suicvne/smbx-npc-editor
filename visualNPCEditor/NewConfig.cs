@@ -33,7 +33,7 @@ namespace smbxnpceditor
                     break;
                 case(false):
                     listViewGroupBox.Visible = false;
-                    this.Size = new System.Drawing.Size(844, 110);
+                    this.Size = new System.Drawing.Size(844, 125);
                     existingConfigRb.Text = "From Existing Configuration";
                     searchTextBox.Enabled = false;
                     npcId = "blank";

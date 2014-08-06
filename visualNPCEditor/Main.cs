@@ -39,6 +39,7 @@ namespace visualNPCEditor
         public string smbxDirectory = null;
         public bool showAnimationPane = true;
         public string curNpcId = "blank";
+        public decimal osversion;
         IniFile defaultConfig;
         ModifyRegistry mr = new ModifyRegistry();
 
@@ -257,7 +258,6 @@ namespace visualNPCEditor
         #region This all the various menu item stuff
         private void menuItem7_Click(object sender, EventArgs e)
         {
-            //curNpcId = "blank";
             workingFile = null;
             hasSaved = false;
             //resetAllItems();
@@ -281,15 +281,39 @@ namespace visualNPCEditor
                 if (workingFile != null)
                 {
                     saveAll(workingFile);
+                    string id = Path.GetFileNameWithoutExtension(workingFile);
+                    String text = npcNameTextBox.Text;
+                    if(npcNameTextBox.Text == "" || npcNameTextBox.Text == " ")
+                    {
+                        npcNameTextBox.Text = "";
+                        npcNameTextBox.CueText = String.Format("Suggested NPC Name: {0}",defaultConfig.ReadValue("npcconfig", id));
+                    }
+                    defaultNpc.Text = String.Format("Looks like {0} replaces {1}", id, defaultConfig.ReadValue("npcconfig", id));
                 }
                 else
                 {
                     saveAs();
+                    string id = Path.GetFileNameWithoutExtension(workingFile);
+                    String text = npcNameTextBox.Text;
+                    if (npcNameTextBox.Text == "" || npcNameTextBox.Text == " ")
+                    {
+                        npcNameTextBox.Text = "";
+                        npcNameTextBox.CueText = String.Format("Suggested NPC Name: {0}", defaultConfig.ReadValue("npcconfig", id));
+                    }
+                    defaultNpc.Text = String.Format("Looks like {0} replaces {1}", id, defaultConfig.ReadValue("npcconfig", id));
                 }
             }
             else
             {
                 saveAs();
+                string id = Path.GetFileNameWithoutExtension(workingFile);
+                String text = npcNameTextBox.Text;
+                if (npcNameTextBox.Text == "" || npcNameTextBox.Text == " ")
+                {
+                    npcNameTextBox.Text = "";
+                    npcNameTextBox.CueText = String.Format("Suggested NPC Name: {0}", defaultConfig.ReadValue("npcconfig", id));
+                }
+                defaultNpc.Text = String.Format("Looks like {0} replaces {1}", id, defaultConfig.ReadValue("npcconfig", id));
             }
         }
 
@@ -426,10 +450,12 @@ namespace visualNPCEditor
             Console.WriteLine("Reading: {0}", file);
             resetAllItems();
             var npcfile = File.ReadAllLines(file);
+            
             var config = (from line in npcfile
-                          let s = line.Split('=')
-                          select new { Key = s[0], Value = s[1] })
-                .ToDictionary(x => x.Key, x => x.Value);
+                              let s = line.Split('=')
+                              select new { Key = s[0], Value = s[1] })
+                    .ToDictionary(x => x.Key, x => x.Value);
+
             for (int index = 0; index < config.Count; index++)
             {
                 decimal number;
@@ -777,17 +803,25 @@ namespace visualNPCEditor
         {
             npcNameTextBox.Text = "";
             npcGfxHeight.Enabled = false;
+            npcGfxHeight.Value = 1;
             npcGfxWidth.Enabled = false;
+            npcGfxWidth.Value = 1;
             xOffset.Enabled = false;
+            xOffset.Value = 0;
             yOffset.Enabled = false;
+            yOffset.Value = 0;
             frames.Enabled = false;
+            frames.Value = 1;
             frameSpeed.Enabled = false;
+            frameSpeed.Value = 8;
             frameStyle.Enabled = false;
             frameStyle.Enabled = false;
             foreground.Enabled = false;
             foreground.Checked = false;
             pNpcHeight.Enabled = false;
+            pNpcHeight.Value = 1;
             pNpcWidth.Enabled = false;
+            pNpcWidth.Value = 1;
             pCollision.Enabled = false;
             pCollision.Checked = false;
             pCollisionTop.Enabled = false;
@@ -1213,10 +1247,17 @@ namespace visualNPCEditor
                 string id = Path.GetFileNameWithoutExtension(openFileDialog1.FileName).ToString();
                 string path = Path.GetDirectoryName(openFileDialog1.FileName).ToString();
                 readFile(path + @"\" + id + ".txt");
+                this.Text = String.Format("SMBX NPC Editor - {0}.txt; {0}.gif", id);
                 animateSprite(id);
+                defaultNpc.Text = String.Format("Looks like {0} replaces {1}", id, defaultConfig.ReadValue("npcconfig", id));
+                npcNameTextBox.CueText = String.Format("Suggested Name: {0}", defaultConfig.ReadValue("npcconfig", id));
             }
-            catch(Exception IGNORE_THIS)
-            { Console.WriteLine("No text file with the graphic..cool cool B)"); }
+            catch
+            {
+                string id = Path.GetFileNameWithoutExtension(openFileDialog1.FileName).ToString();
+                Console.WriteLine("No text file with the graphic..cool cool B)");
+                this.Text = String.Format("SMBX NPC Editor - {0}.gif", id);
+            }
         }
 
         public void showSprite(string fileName)
@@ -1345,7 +1386,7 @@ namespace visualNPCEditor
                     break;
                 }
 
-                if (frames.Value == 0)
+                if (frames.Value == 1)
                 {
                     if (framesCb.Checked == true)
                     {
@@ -1476,6 +1517,7 @@ namespace visualNPCEditor
                 string[] split = ver.Split(new char[] { '.' });
                 string final = split[0].ToString() + "." + split[1].ToString();
                 decimal finall = decimal.Parse(final);
+                osversion = finall;
                 if(finall == (decimal)6.2 || finall == (decimal)6.3 || finall > (decimal)6.3)
                 {
                     switch (enableAnimation)
@@ -1560,76 +1602,71 @@ namespace visualNPCEditor
 
         private void animationPaneMenuItem_Click(object sender, EventArgs e)
         {
-            Microsoft.VisualBasic.Devices.Computer MyComputer = new Microsoft.VisualBasic.Devices.Computer();
-            string ver = MyComputer.Info.OSVersion;
-            string[] split = ver.Split(new char[] { '.' });
-            string final = split[0].ToString() + "." + split[1].ToString();
-            decimal finall = decimal.Parse(final);
-            if (finall == (decimal)6.2 || finall == (decimal)6.3 || finall > (decimal)6.3)
+            if (osversion == (decimal)5.2 || osversion == (decimal)5.3)
             {
-                switch (enableAnimation)
+                switch (animationPaneMenuItem.Checked)
                 {
-                    case ("true"):
-                        showAnimationPane = true;
-                        animationPaneMenuItem.Checked = true;
-                        //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(1176, 460);
-                        break;
-                    case ("false"):
+                    case (true):
                         showAnimationPane = false;
                         animationPaneMenuItem.Checked = false;
-                        //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(799, 460);
+                        try
+                        {
+                            mr.Write("SHOWANIMATION", "false");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        this.Size = new System.Drawing.Size(799, 465);
+
+                        break;
+                    case (false):
+                        showAnimationPane = true;
+                        animationPaneMenuItem.Checked = true;
+                        try
+                        {
+                            mr.Write("SHOWANIMATION", "true");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        this.Size = new System.Drawing.Size(1176, 465);
                         break;
                 }
             }
             else
             {
-                switch (enableAnimation)
+                switch (animationPaneMenuItem.Checked)
                 {
-                    case ("true"):
-                        showAnimationPane = true;
-                        animationPaneMenuItem.Checked = true;
-                        //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(1176, 444);
-                        break;
-                    case ("false"):
+                    case (true):
                         showAnimationPane = false;
                         animationPaneMenuItem.Checked = false;
-                        //npcAnimationGroup.Visible = true;
-                        this.Size = new System.Drawing.Size(799, 444);
+                        try
+                        {
+                            mr.Write("SHOWANIMATION", "false");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        this.Size = new System.Drawing.Size(799, 427);
+
+                        break;
+                    case (false):
+                        showAnimationPane = true;
+                        animationPaneMenuItem.Checked = true;
+                        try
+                        {
+                            mr.Write("SHOWANIMATION", "true");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        this.Size = new System.Drawing.Size(1176, 427);
                         break;
                 }
-            }
-            switch (animationPaneMenuItem.Checked)
-            {
-                case (true):
-                    showAnimationPane = false;
-                    animationPaneMenuItem.Checked = false;
-                    try
-                    {
-                        mr.Write("SHOWANIMATION", "false");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    this.Size = new System.Drawing.Size(799, 427);
-
-                    break;
-                case (false):
-                    showAnimationPane = true;
-                    animationPaneMenuItem.Checked = true;
-                    try
-                    {
-                        mr.Write("SHOWANIMATION", "true");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    this.Size = new System.Drawing.Size(1176, 427);
-                    break;
             }
         }
 
@@ -1660,6 +1697,10 @@ namespace visualNPCEditor
             {
                 npc = "blank";
                 resetAllItems();
+                pictureBox1.Image = null;
+                timer1.Stop();
+                npcNameTextBox.CueText = "";
+                defaultNpc.Text = "Load or Save a File!";
             }
         }
 
@@ -1956,15 +1997,12 @@ namespace visualNPCEditor
             if (pictureBox1.Image != null)
             {
                 pictureBox1.SuspendLayout();
-                //Bitmap sprite = (Bitmap)pictureBox1.Image;
-                //sprite.RotateFlip(RotateFlipType.Rotate180FlipY);
                 animatedImage.RotateFlip(RotateFlipType.Rotate180FlipY);
                 pictureBox1.Image = animatedImage;
                 pictureBox1.Update();
                 timer1.Stop();
                 animateSprite(curNpcId);
                 pictureBox1.Show();
-                //animateSprite(curNpcId);
             }
         }
         //end of class

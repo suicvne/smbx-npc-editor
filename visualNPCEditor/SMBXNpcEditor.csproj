@@ -103,6 +103,12 @@
       <DependentUpon>NewConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\SMBX64.ini" />
+    <None Include="Resources\lvl_npc.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\npc-config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="serializeNPC.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -120,12 +126,6 @@
     <None Include="notanicon.png" />
     <Content Include="FodyWeavers.xml" />
     <Content Include="notanicon.ico" />
-    <Content Include="npc-165.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="npc-166.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\e7d7d8db2773f0e53d7407cffd9bb6f4.png" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>
