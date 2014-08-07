@@ -1704,29 +1704,12 @@ namespace visualNPCEditor
             }
         }
 
-        public int frameSpeedConversion(int value)
+        public int frameSpeedConversion(int value, int txtFramespeed)
         {
-            if (value == 32 || value == 64 || value == 70 || value == 128 || value == 256)
-            {
-                switch (value)
-                {
-                    case (32):
-                        return 3;
-                    case (64):
-                        return 5;
-                    case (70):
-                        return 6;
-                    case (128):
-                        return 8;
-                    case (256):
-                        return 16;
-                }
-            }
-            else
-            {
-                return 8;
-            }
-            return 8;
+            //answer = iniFramespeed / (8/txtFramespeed)
+            //Shoutout to wohlstand for this formula!
+            int answer = value / (8 / txtFramespeed);
+            return answer;
         }
 
         public void loadFromWohl(string npcid, NewConfig nc)
@@ -1751,7 +1734,7 @@ namespace visualNPCEditor
             }
             frames.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "frames")); //framesCb.Checked = true;
             //framespeed here
-            frameSpeed.Value = frameSpeedConversion(int.Parse(nc.wohlConfig.ReadValue(npcid, "frame-speed")));
+            frameSpeed.Value = frameSpeedConversion(int.Parse(nc.wohlConfig.ReadValue(npcid, "frame-speed")), 8);
             switch (nc.wohlConfig.ReadValue(npcid, "foreground"))
             {
                 case ("1"):
