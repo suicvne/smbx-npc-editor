@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Setting">
-      <HintPath>..\visualNPCEditor\bin\Debug\Setting.dll</HintPath>
+      <HintPath>E:\Users\Mike\Documents\GitHub\smbx-npc-editor\visualNPCEditor\bin\Debug\Setting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

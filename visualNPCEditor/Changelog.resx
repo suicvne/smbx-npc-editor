@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>---1.4.2.0---
+    <value>---1.4.2.1---
+-Fixed a bug where on Windows XP, the ini file would try to be read from the file your opening from's directory instead of the executables. (Thanks a bunch Wohlstand!)
+-Added support for using Alt and letters to navigate the menus.
+
+---1.4.2.0---
 -Lots of minor tweaks and stuff to saving, loading, etc
 -Fixed a bug where Windows 8 users had cutoff windows (ffs)
 -Added a "clear" and "reflect sprite" button to the NPC Animation pane. Reflect sprite literally reflects, is just for previewing only

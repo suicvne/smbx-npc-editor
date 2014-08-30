@@ -114,7 +114,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Setting">
-      <HintPath>..\..\smbx-epmanager-ver3\Setting.dll</HintPath>
+      <HintPath>E:\Users\Mike\Documents\GitHub\smbx-npc-editor\visualNPCEditor\bin\Debug\Setting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

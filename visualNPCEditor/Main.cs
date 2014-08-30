@@ -24,6 +24,7 @@ namespace visualNPCEditor
         public bool hasSaved;
         public string workingFile;
         public string imagePath;
+        public string executableLocation = Environment.CurrentDirectory;
         public FileStream fs;
         public Image animatedImage;
         public Image fromFile;
@@ -76,8 +77,8 @@ namespace visualNPCEditor
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Unable to create animation: " + ex.Message);
-                        MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                       Console.WriteLine("Unable to create animation: " + ex.Message);
+                       MessageBox.Show("Unable to create animation\n" + ex.Message, "Error While Trying to Animate", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     try
                     {
@@ -1286,7 +1287,7 @@ namespace visualNPCEditor
 
         public void animateSprite(string npcid)
         {
-            IniFile wohl = new IniFile(Environment.CurrentDirectory + @"\lvl_npc.ini");
+            IniFile wohl = new IniFile(executableLocation + @"\lvl_npc.ini");
                 int errorLevel = 0; //0 is no error, 1 is gfxheight, 2 is gfxwidth, 3 is both
                 if (npcGfxHeight.Value != 0)
                 {
