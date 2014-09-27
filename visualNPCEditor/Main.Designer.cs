@@ -1019,7 +1019,7 @@
             this.noFireball.Size = new System.Drawing.Size(15, 14);
             this.noFireball.TabIndex = 24;
             this.toolTip.SetToolTip(this.noFireball, "If checked, then the NPC can\'t be killed by fireballs\r\n\r\nNOTE: Most SMB2 enemies " +
-                    "can be killed by fireballs\r\nif this value is left unchecked.");
+        "can be killed by fireballs\r\nif this value is left unchecked.");
             this.noFireball.UseVisualStyleBackColor = true;
             // 
             // label21
@@ -1031,7 +1031,7 @@
             this.label21.TabIndex = 37;
             this.label21.Text = "No fireball:";
             this.toolTip.SetToolTip(this.label21, "If checked, then the NPC can\'t be killed by fireballs\r\n\r\nNOTE: Most SMB2 enemies " +
-                    "can be killed by fireballs\r\nif this value is left unchecked.");
+        "can be killed by fireballs\r\nif this value is left unchecked.");
             // 
             // speedCb
             // 
@@ -1243,7 +1243,7 @@
             this.scoreList.Size = new System.Drawing.Size(94, 23);
             this.scoreList.TabIndex = 17;
             this.toolTip.SetToolTip(this.scoreList, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
-                    "\'t get points");
+        "\'t get points");
             // 
             // label7
             // 
@@ -1254,7 +1254,7 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Score: ";
             this.framesTip.SetToolTip(this.label7, "Corresponds to the score you\'ll get when killing the NPC. If set to none, you won" +
-                    "\'t get points");
+        "\'t get points");
             // 
             // grabSideCb
             // 
@@ -1291,9 +1291,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 19);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 17);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(354, 277);
+            this.pictureBox1.Size = new System.Drawing.Size(354, 279);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -1402,7 +1402,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.defaultNpc,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 394);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 362);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1170, 22);
             this.statusStrip1.TabIndex = 19;
@@ -1411,15 +1411,15 @@
             // defaultNpc
             // 
             this.defaultNpc.Name = "defaultNpc";
-            this.defaultNpc.Size = new System.Drawing.Size(70, 17);
+            this.defaultNpc.Size = new System.Drawing.Size(64, 17);
             this.defaultNpc.Text = "Load a file!";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(540, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(494, 17);
             this.toolStripStatusLabel1.Text = "| Remember to Check off the Values you want to write to config file (furthest rig" +
-                "ht checkbox)";
+    "ht checkbox)";
             // 
             // clearButton
             // 
@@ -1454,7 +1454,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1170, 416);
+            this.ClientSize = new System.Drawing.Size(1170, 384);
             this.Controls.Add(this.reflectButton);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.statusStrip1);

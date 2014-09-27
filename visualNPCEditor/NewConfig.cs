@@ -17,6 +17,11 @@ namespace smbxnpceditor
         public NewConfig()
         {
             InitializeComponent();
+            if(!Directory.Exists(Environment.CurrentDirectory + @"\sprites"))
+            { 
+                existingConfigRb.Enabled = false;
+                radioButton1.Checked = true;
+            }
         }
         public string npcId = "npc-1";
         public IniFile wohlConfig = new IniFile(Environment.CurrentDirectory + @"\lvl_npc.ini");
@@ -98,9 +103,16 @@ namespace smbxnpceditor
         {
             
             Control.CheckForIllegalCrossThreadCalls = false;
-
-            System.Threading.Thread load = new System.Threading.Thread(reloadList);
-            load.Start();
+            if (!Directory.Exists(Environment.CurrentDirectory + @"\sprites"))
+            {
+                existingConfigRb.Enabled = false;
+                radioButton1.Checked = true;
+            }
+            else
+            {
+                System.Threading.Thread load = new System.Threading.Thread(reloadList);
+                load.Start();
+            }
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)

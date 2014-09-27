@@ -259,21 +259,30 @@ namespace visualNPCEditor
         #region This all the various menu item stuff
         private void menuItem7_Click(object sender, EventArgs e)
         {
-            workingFile = null;
-            hasSaved = false;
-            //resetAllItems();
-            //defaultNpc.Text = "Load a file or save one!";
-            NewConfig con = new NewConfig();
-            var result = con.ShowDialog();
-            switch (result)
+            if(Directory.Exists(Path.Combine(Environment.CurrentDirectory, "sprites")))
             {
-                case (DialogResult.OK):
-                    whichNPC(con);
-                    break;
-                case (DialogResult.Cancel):
-                    break;
+                workingFile = null;
+                hasSaved = false;
+                //resetAllItems();
+                //defaultNpc.Text = "Load a file or save one!";
+                NewConfig con = new NewConfig();
+                var result = con.ShowDialog();
+                switch (result)
+                {
+                    case (DialogResult.OK):
+                        whichNPC(con);
+                        break;
+                    case (DialogResult.Cancel):
+                        break;
+                }
+                this.Text = "SMBX NPC Editor";
             }
-            this.Text = "SMBX NPC Editor";
+            else
+            {
+                workingFile = null;
+                hasSaved = false;
+                this.Text = "SMBX NPC Editor - Sprites Folder Missing";
+            }
         }
         private void menuItem3_Click(object sender, EventArgs e)
         {
@@ -1735,7 +1744,7 @@ namespace visualNPCEditor
             }
             frames.Value = int.Parse(nc.wohlConfig.ReadValue(npcid, "frames")); //framesCb.Checked = true;
             //framespeed here
-            frameSpeed.Value = frameSpeedConversion(int.Parse(nc.wohlConfig.ReadValue(npcid, "frame-speed")), 8);
+            frameSpeed.Value = frameSpeedConversion(int.Parse(nc.wohlConfig.ReadValue(npcid, "frame-speed")), 1);
             switch (nc.wohlConfig.ReadValue(npcid, "foreground"))
             {
                 case ("1"):
