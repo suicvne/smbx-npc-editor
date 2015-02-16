@@ -48,6 +48,8 @@ namespace visualNPCEditor
         public Main()
         {
             InitializeComponent();
+            Font f = new Font(SystemFonts.MessageBoxFont.FontFamily, 9); //Gets the system font and sets it to 9 point so everything looks ok
+            Font = f;
         }
 
         private void npcHCb_CheckedChanged(object sender, EventArgs e)
@@ -1719,7 +1721,10 @@ namespace visualNPCEditor
             //answer = iniFramespeed / (8/txtFramespeed)
             //Shoutout to wohlstand for this formula!
             int answer = value / (8 / txtFramespeed);
-            return answer;
+            if (answer == 32)
+                return 8;
+            else
+                return answer;
         }
 
         public void loadFromWohl(string npcid, NewConfig nc)

@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>---1.4.2.2---
+    <value>---1.4.2.3---
+-Fixed ANOTHER math error pertaining to framespeed
+-Fixed the ugly font that was used on the MainForm, shouldn't have happened yet it did anyway.
+
+---1.4.2.2---
 -Fixed a math error on my part in calculating framespeed
 -New config menu won't show if it can't find the sprites folder with all the appropriate sprites in it
 
